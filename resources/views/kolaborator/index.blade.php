@@ -293,7 +293,46 @@
                         <div class="card h-100 shadow-sm hover-shadow transition-all">
                             <div class="card-body text-center">
                                 <div class="mb-3">
-                                    <div class="rounded-circle bg-info bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
+                                    <div class="rounded-circle bg-primary bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
+                                        N
+                                    </div>
+                                </div>
+                                <h5 class="card-title">Nita</h5>
+                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm hover-shadow transition-all">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <div class="rounded-circle bg-success bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
+                                        Z
+                                    </div>
+                                </div>
+                                <h5 class="card-title">Zarith</h5>
+                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm hover-shadow transition-all">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <div class="rounded-circle bg-danger bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
+                                        H
+                                    </div>
+                                </div>
+                                <h5 class="card-title">Haris</h5>
+                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm hover-shadow transition-all">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <div class="rounded-circle bg-warning bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
                                         R
                                     </div>
                                 </div>
