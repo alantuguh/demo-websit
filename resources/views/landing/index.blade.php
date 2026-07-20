@@ -305,42 +305,42 @@
                     Website LPSKE ini dikembangkan melalui kerja sama yang solid antara berbagai pihak yang berkontribusi dalam pengembangan sistem informasi laboratorium.
                 </p>
                 
-                <div class="d-flex justify-content-center align-items-center mb-4 flex-wrap gap-4">
-    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
-        <img src="{{ asset('images/smk2ska.png') }}" alt="Kolaborator 1" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    </div>
+                <div class="mb-4" style="display: grid; grid-template-columns: repeat(8, 90px); justify-content: center; gap: 24px;">
+                    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
+                        <img src="{{ asset('images/smk2ska.png') }}" alt="Kolaborator 1" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </div>
 
-    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
-        <img src="{{ asset('images/enuma.jfif') }}" alt="Kolaborator 2" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    </div>
+                    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
+                        <img src="{{ asset('images/enuma.jfif') }}" alt="Kolaborator 2" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </div>
 
-    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
-        <img src="{{ asset('images/title_lpske.png') }}" alt="Kolaborator 3" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    </div>
+                    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
+                        <img src="{{ asset('images/title_lpske.png') }}" alt="Kolaborator 3" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </div>
 
-    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
-        <img src="{{ asset('images/mers.jfif') }}" alt="Kolaborator 4" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    </div>
+                    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
+                        <img src="{{ asset('images/mers.jfif') }}" alt="Kolaborator 4" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </div>
 
-    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
-        <img src="{{ asset('images/Ptik uns.png') }}" alt="Kolaborator 5" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    </div>
+                    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
+                        <img src="{{ asset('images/Ptik uns.png') }}" alt="Kolaborator 5" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </div>
 
-    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
-        <img src="{{ asset('images/Smk6.png') }}" alt="Kolaborator 6" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    </div>
+                    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
+                        <img src="{{ asset('images/Smk6.png') }}" alt="Kolaborator 6" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </div>
 
-    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
-        <img src="{{ asset('images/Sportflux.png') }}" alt="Kolaborator 7" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    </div>
+                    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
+                        <img src="{{ asset('images/Sportflux.png') }}" alt="Kolaborator 7" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </div>
 
-    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
-        <img src="{{ asset('images/Brainova.png') }}" alt="Kolaborator 8" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    </div>
-</div>
+                    <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5);">
+                        <img src="{{ asset('images/Brainova.png') }}" alt="Kolaborator 8" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </div>
+                </div>
                 
-                <a href="{{ route('kolaborator') }}" class="btn btn-light btn-lg px-4 py-2 shadow-sm" style="border-radius: 50px;">
-                    <i class="fas fa-eye me-2"></i> see more
+                <a href="{{ route('kolaborator') }}" class="btn btn-light btn-lg px-2 py-1 shadow-sm" style="border-radius: 50px;">
+                    <i class="fas fa-eye sm-1"></i> see more
                 </a>
             </div>
         </div>
