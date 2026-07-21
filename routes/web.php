@@ -38,7 +38,16 @@ Route::controller(\App\Http\Controllers\KatalogKaryaController::class)
         Route::get('/{karyaLab}', 'show')->name('show');
     });
 
-// Kolaborator route
+// Proyek Laboratorium (Wibawa, Jarpak, Semesta, DIKTI, Kerja Sama UNS)
+Route::controller(\App\Http\Controllers\ProyekLaboratoriumController::class)
+    ->prefix('proyek-laboratorium')
+    ->name('proyek-laboratorium.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{proyekLaboratorium}', 'show')->name('show');
+    });
+
+    // Kolaborator route
 Route::get('/kolaborator', [LandingController::class, 'kolaborator'])
     ->name('kolaborator');
 

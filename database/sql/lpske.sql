@@ -587,6 +587,25 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 
 -- --------------------------------------------------------
 
+CREATE TABLE IF NOT EXISTS `proyek_laboratorium` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `judul_proyek` varchar(255) NOT NULL,
+  `kategori` enum('wibawa','jarpak','semesta','dikti','kerjasama_uns') NOT NULL,
+  `deskripsi` text,
+  `tahun` year NOT NULL,
+  `mitra` varchar(255) DEFAULT NULL,
+  `status` enum('berjalan','selesai') NOT NULL DEFAULT 'berjalan',
+  `gambar` varchar(255) DEFAULT NULL,
+  `link_terkait` varchar(255) DEFAULT NULL,
+  `is_featured` tinyint(1) NOT NULL DEFAULT '0',
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `sort_order` int NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Struktur dari tabel `teams`
 --

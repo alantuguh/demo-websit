@@ -222,6 +222,9 @@
                         <a class="nav-link" href="{{ route('katalog-karya.index') }}">Katalog Karya</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('proyek-laboratorium.index') }}">Proyek Laboratorium</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('public.alumni.index') }}">Alumni</a>
                     </li>
                 </ul>
