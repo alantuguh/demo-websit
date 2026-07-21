@@ -29,6 +29,15 @@ Route::controller(\App\Http\Controllers\PrestasiKegiatanController::class)
         Route::get('/{prestasiKegiatan}', 'show')->name('show');
     });
 
+// Katalog Produk & Karya
+Route::controller(\App\Http\Controllers\KatalogKaryaController::class)
+    ->prefix('katalog-karya')
+    ->name('katalog-karya.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{karyaLab}', 'show')->name('show');
+    });
+
 // Kolaborator route
 Route::get('/kolaborator', [LandingController::class, 'kolaborator'])
     ->name('kolaborator');

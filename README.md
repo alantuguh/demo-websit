@@ -226,6 +226,7 @@ Diakses siapa saja lewat browser, dilayani oleh `LandingController` (`routes/web
 | Kepala Laboratorium | `/kepala-laboratorium` | Profil kepala lab |
 | Dosen Laboratorium | `/dosen-laboratorium` | Profil dosen lab |
 | Prestasi & Kegiatan | `/prestasi-kegiatan` dan `/prestasi-kegiatan/{id}` | Dokumentasi prestasi & kegiatan (daftar + detail) |
+| Katalog Produk & Karya | `/katalog-karya` dan `/katalog-karya/{id}` | Katalog hasil penelitian, produk, publikasi, dan prototipe lab (daftar + detail, filter kategori) |
 | Kolaborator | `/kolaborator` | Daftar mitra/kolaborator |
 | Alumni Story | `/alumni` | Kisah/cerita alumni |
 | Recent Logbook | `/recent-logbook` | Endpoint data logbook terbaru |
@@ -238,6 +239,7 @@ Panel manajemen penuh (Filament). Fitur (dikelompokkan sesuai menu navigasi):
   - **Tim** — kelola anggota tim yang tampil di website
   - **Alumni Story** — kelola cerita alumni
   - **Dokumentasi: Prestasi & Kegiatan** — kelola prestasi & kegiatan
+  - **Katalog Produk & Karya** — kelola katalog hasil penelitian, produk, publikasi, dan prototipe lab
 - **Kelola Akun**
   - **Asisten** — kelola akun berperan asisten
   - **Anggota** — kelola akun berperan anggota
@@ -284,6 +286,7 @@ yang menunjuk ke satu tabel di database `lpske`.
 | Kelola Akun (Asisten & Anggota) | Panel Admin | `User` | **`users`** |
 | Tim (kepala lab, dosen, asisten, dll) | Panel Admin | `Team` | **`teams`** |
 | Prestasi & Kegiatan | Panel Admin | `PrestasiKegiatan` | **`prestasi_kegiatan`** |
+| Katalog Produk & Karya | Panel Admin | `KaryaLab` | **`karya_lab`** |
 | Alumni Story | Panel Admin | `AlumniStory` | **`alumni_story`** |
 | Alat & Barang (inventaris) | Panel Admin | `InventoryItem` | **`inventory_items`** |
 | Peminjaman alat/barang | Panel Admin & Anggota | `Peminjaman` | **`peminjaman`** |
@@ -297,6 +300,7 @@ yang menunjuk ke satu tabel di database `lpske`.
 - **`users`** — akun login: `name`, `email`, `password`, `role` (`admin`/`asisten`/`anggota`)
 - **`teams`** — anggota tim di website: `type`, `name`, `nip`, `nim`, `position`, `study_program`, `expertise`, `email`, `phone`, `photo`, `angkatan`, `bio`, `sort_order`, `is_active`
 - **`prestasi_kegiatan`** — dokumentasi: `judul`, `deskripsi`, `gambar`, `video_url`, `jenis`, `tanggal`, `is_video`, `is_featured`, `is_active`, `sort_order`
+- **`karya_lab`** — katalog produk & karya: `nama_karya`, `kategori` (`penelitian`/`produk`/`publikasi`/`prototipe`), `deskripsi`, `tahun`, `tim_penulis`, `file_gambar`, `link_publikasi`, `is_featured`, `is_active`, `sort_order`
 - **`alumni_story`** — cerita alumni: `deskripsi`, `foto`, `angkatan`, `is_active`, `user_id`
 - **`inventory_items`** — data alat/barang: `nama_barang`, `jumlah`, `jumlah_tersedia`, `kondisi`, `keterangan`
 - **`peminjaman`** — peminjaman barang: `inventory_item_id`, `peminjam_id`, `jumlah`, `tanggal_pinjam`, `tanggal_kembali`, `tanggal_pengembalian`, `alasan_pinjam`, `catatan_admin`, `status`
