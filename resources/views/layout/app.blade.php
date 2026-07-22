@@ -427,7 +427,6 @@
             background: #16202b;
             color: rgba(255, 255, 255, 0.85);
             padding: 64px 0 28px;
-            margin-top: 80px;
         }
 
         footer h5 {
@@ -497,26 +496,13 @@
             font-size: 0.88rem;
         }
         .bg-particles {
-       /* Tetap pertahankan warna dasar agar nyambung dengan gradien Hero */
-        background-color: rgba(195, 208, 227, 0.5); 
-        position: relative;
-        z-index: 1; /* Pastikan konten teks/card berada di atas partikel */
-        }
-
-/* Pindahkan efek titik-titik ke dalam pseudo-element ::before */
-        .bg-particles::before {
-            content: '';
-            position: absolute;
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            bottom: 0;
-            z-index: -1; /* Taruh di bawah konten */
+            background-color: rgba(195, 208, 227, 0.5); 
             background-image: 
                 radial-gradient(rgba(176, 99, 13, 0.25) 2px, transparent 5px),
                 radial-gradient(rgba(82, 103, 132, 0.2) 2.5px, transparent 6px);
             background-size: 60px 60px;
-            background-position: 0 0, 30px 30px;    
+            background-position: 0 0, 30px 30px;
+            position: relative;
         }
     </style>
 </head>
