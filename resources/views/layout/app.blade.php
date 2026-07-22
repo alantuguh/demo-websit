@@ -103,33 +103,67 @@
 
         .navbar-nav .nav-link:hover,
         .navbar-nav .nav-link:focus,
-        .navbar-nav .dropdown:hover > .nav-link {
+        .navbar-nav .nav-link.active,
+        .navbar-nav .dropdown:hover > .nav-link,
+        .navbar-nav .dropdown.show > .nav-link {
             color: var(--primary-color) !important;
         }
 
         .navbar-nav .nav-link:hover::before,
         .navbar-nav .nav-link:focus::before,
+        .navbar-nav .nav-link.active::before,
         .navbar-nav .dropdown:hover > .nav-link::before,
         .navbar-nav .dropdown.show > .nav-link::before {
             width: 55%;
         }
 
         .dropdown-menu {
-            border: none;
-            box-shadow: 0 12px 32px rgba(17, 24, 39, 0.12);
-            border-radius: 0.9rem;
-            padding: 0.5rem;
+            display: block !important; 
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-30px) scale(1);
+            pointer-events: none;
+            transition: opacity 0.2s cubic-bezier(1, 0, 0.2, 1),
+                        transform 0.2s cubic-bezier(1, 0, 0.2, 1),
+                        visibility 0.2s ease-in-out;
         }
+
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+            transition: opacity 0.3s cubic-bezier(0, 0, 0.2, 1),
+                        transform 0.3s cubic-bezier(0, 0, 0.2, 1),
+                        visibility 0.3s ease-out;
+        }
+        
+        .dropdown-menu.show li:nth-child(1) { transition-delay: 0.05s; }
+        .dropdown-menu.show li:nth-child(2) { transition-delay: 0.09s; }
+        .dropdown-menu.show li:nth-child(3) { transition-delay: 0.13s; }
+        .dropdown-menu.show li:nth-child(4) { transition-delay: 0.17s; }
+        .dropdown-menu.show li:nth-child(5) { transition-delay: 0.21s; }
+        .dropdown-menu.show li:nth-child(6) { transition-delay: 0.25s; }
+        .dropdown-menu.show li:nth-child(7) { transition-delay: 0.29s; }
+        .dropdown-menu.show li:nth-child(8) { transition-delay: 0.33s; }
 
         .dropdown-item {
             border-radius: 0.6rem;
             font-weight: 500;
             padding: 0.55rem 0.9rem;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         .dropdown-item:hover {
             background: var(--surface);
             color: var(--primary-color);
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        .dropdown-item.active, 
+        .dropdown-item:active {
+            background-color: var(--primary-color);
+            color: #ffffff !important;
         }
 
         /* ===== Buttons ===== */
@@ -231,7 +265,7 @@
         /* ===== Cards ===== */
         .card-flat {
             background: #fff;
-            border: 2px solid var(--primary-color);
+            border: 1px solid var(--primary-color);
             box-shadow: 0 8px 24px rgba(17, 24, 39, 0.12);
             border-radius: 1.1rem;
             transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
@@ -513,8 +547,8 @@
             bottom: 0;
             z-index: -1; /* Taruh di bawah konten */
             background-image: 
-                radial-gradient(rgba(176, 99, 13, 0.25) 2px, transparent 5px),
-                radial-gradient(rgba(82, 103, 132, 0.2) 2.5px, transparent 6px);
+                radial-gradient(rgba(176, 99, 13, 0.25) 2.5px, transparent 3px),
+                radial-gradient(rgba(82, 103, 132, 0.2) 2px, transparent 4px);
             background-size: 60px 60px;
             background-position: 0 0, 30px 30px;    
         }
@@ -522,7 +556,7 @@
 </head>
 <body>
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background: linear-gradient(180deg, rgba(195, 208, 227, 0.75) 25%, #aebfda 100%);">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <img src="{{ asset('images/logo_lpske.png') }}" alt="LPSKE Logo" height="40" class="d-inline-block align-text-top">
@@ -533,34 +567,34 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}#home">Beranda</a>
+                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}#home">Beranda</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="asistenDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle {{ request()->routeIs('asisten-laboratorium*', 'kepala-laboratorium*', 'dosen-laboratorium*') ? 'active' : ''}}" href="#" id="asistenDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Asisten Laboratorium
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="asistenDropdown">
-                            <li><a class="dropdown-item" href="{{ route('asisten-laboratorium') }}">Semua Asisten</a></li>
+                        <ul class="dropdown-menu" style="background: linear-gradient(180deg, rgba(195, 208, 227, 0.9) 75%, #d9dde4 100%)"aria-labelledby="asistenDropdown">
+                            <li><a class="dropdown-item {{ request()->routeIs('asisten-laboratorium') && !request('angkatan') ? 'active' : '' }}" href="{{ route('asisten-laboratorium') }}">Semua Asisten</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ route('asisten-laboratorium', ['angkatan' => 2020]) }}">Angkatan 2020</a></li>
-                            <li><a class="dropdown-item" href="{{ route('asisten-laboratorium', ['angkatan' => 2019]) }}">Angkatan 2019</a></li>
-                            <li><a class="dropdown-item" href="{{ route('asisten-laboratorium', ['angkatan' => 2018]) }}">Angkatan 2018</a></li>
+                            <li><a class="dropdown-item {{ request('angkatan') == 2020 ? 'active' : '' }}" href="{{ route('asisten-laboratorium', ['angkatan' => 2020]) }}">Angkatan 2020</a></li>
+                            <li><a class="dropdown-item {{ request('angkatan') == 2019 ? 'active' : '' }}" href="{{ route('asisten-laboratorium', ['angkatan' => 2019]) }}">Angkatan 2019</a></li>
+                            <li><a class="dropdown-item {{ request('angkatan') == 2018 ? 'active' : '' }}" href="{{ route('asisten-laboratorium', ['angkatan' => 2018]) }}">Angkatan 2018</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ route('kepala-laboratorium') }}">Kepala Laboratorium</a></li>
-                            <li><a class="dropdown-item" href="{{ route('dosen-laboratorium') }}">Dosen Laboratorium</a></li>
+                            <li><a class="dropdown-item {{ request()->routeIs('kepala-laboratorium') ? 'active' : '' }}" href="{{ route('kepala-laboratorium') }}">Kepala Laboratorium</a></li>
+                            <li><a class="dropdown-item {{ request()->routeIs('dosen-laboratorium') ? 'active' : '' }}" href="{{ route('dosen-laboratorium') }}">Dosen Laboratorium</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('prestasi-kegiatan.index') }}">Prestasi & Kegiatan</a>
+                        <a class="nav-link {{ request()->routeIs('prestasi-kegiatan.index') ? 'active' : '' }}" href="{{ route('prestasi-kegiatan.index') }}">Prestasi & Kegiatan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('katalog-karya.index') }}">Katalog Karya</a>
+                        <a class="nav-link {{ request()->routeIs('katalog-karya.index') ? 'active' : '' }}" href="{{ route('katalog-karya.index') }}">Katalog Karya</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('proyek-laboratorium.index') }}">Proyek Laboratorium</a>
+                        <a class="nav-link {{ request()->routeIs('proyek-laboratorium.index') ? 'active' : '' }}" href="{{ route('proyek-laboratorium.index') }}">Proyek Laboratorium</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('public.alumni.index') }}">Alumni</a>
+                        <a class="nav-link {{ request()->routeIs('public.alumni.index') ? 'active' : '' }}" href="{{ route('public.alumni.index') }}">Alumni</a>
                     </li>
                 </ul>
             </div>

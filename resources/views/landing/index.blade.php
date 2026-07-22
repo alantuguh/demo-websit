@@ -3,7 +3,7 @@
 @section('content')
 
     {{-- ===================== HERO ===================== --}}
-            <section class="position-relative overflow-hidden" id="home" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.5) 0%, #aebfda 100%); padding: 110px 0 90px;">
+    <section class="position-relative overflow-hidden" id="home" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.5) 0%, #aebfda 100%); padding: 110px 0 90px;">
         <div class="container">
             <div class="row align-items-center g-5 flex-column-reverse flex-lg-row">
                 <div class="col-lg-6 text-center text-lg-start">
@@ -280,7 +280,7 @@
     @endfor
 
     {{-- ===================== KOLABORASI PROYEK / PARTNERS ===================== --}}
-    <section class="py-5 position-relative bg-particles" style="background: linear-gradient(360deg, #aebfda 0%, rgba(195, 208, 227, 0.5) 100%); color: var(--ink); padding-top: 6rem !important; padding-bottom: 6rem !important;">
+    <section class="py-5 position-relative" style="background: linear-gradient(360deg, #aebfda 0%, rgba(195, 208, 227, 0.5) 100%); color: var(--ink); padding-top: 6rem !important; padding-bottom: 6rem !important;">
         <div class="container position-relative" style="z-index: 1;">
             <div class="text-center" data-aos="fade-up">
                 <span class="eyebrow" style="color: var(--ink);">Mitra & Jaringan</span>
