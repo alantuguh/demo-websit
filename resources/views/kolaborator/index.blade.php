@@ -377,11 +377,37 @@
                             <div class="card-body text-center">
                                 <div class="mb-3">
                                     <div class="rounded-circle bg-primary bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        P
+                                        AT
                                     </div>
                                 </div>
-                                <h5 class="card-title">Nama Kontributor</h5>
-                                <p class="text-muted mb-2">PTIK</p>
+                                <h5 class="card-title">Alan Tuguh</h5>
+                                <p class="text-muted mb-2">PTIK UNS</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm hover-shadow transition-all">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <div class="rounded-circle bg-primary bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
+                                        MH
+                                    </div>
+                                </div>
+                                <h5 class="card-title">Muhamad Haikal</h5>
+                                <p class="text-muted mb-2">PTIK UNS</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm hover-shadow transition-all">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <div class="rounded-circle bg-primary bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
+                                        ND
+                                    </div>
+                                </div>
+                                <h5 class="card-title">Naufal Daaris</h5>
+                                <p class="text-muted mb-2">PTIK UNS</p>
                             </div>
                         </div>
                     </div>
