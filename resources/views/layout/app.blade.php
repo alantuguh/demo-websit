@@ -497,7 +497,7 @@
             font-size: 0.88rem;
         }
         .bg-particles {
-            background-color: rgba(195, 208, 227, 0.25); 
+            background-color: rgba(195, 208, 227, 0.5); 
             background-image: 
                 radial-gradient(rgba(176, 99, 13, 0.25) 2px, transparent 5px),
                 radial-gradient(rgba(82, 103, 132, 0.2) 2.5px, transparent 6px);
