@@ -29,6 +29,17 @@
             --muted: #6b7280;
             --font-heading: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
             --font-body: 'Inter', 'Segoe UI', sans-serif;
+
+            /* ===== Design tokens: one scale, reused everywhere =====
+               Swap a value here and it updates every card, button, badge. */
+            --radius-sm: 0.6rem;
+            --radius-md: 0.9rem;
+            --radius-lg: 1.25rem;
+            --radius-pill: 999px;
+
+            --shadow-rest: 0 6px 16px rgba(17, 24, 39, 0.08);
+            --shadow-hover: 0 20px 40px rgba(17, 24, 39, 0.14);
+            --shadow-brand: 0 16px 32px rgba(82, 103, 132, 0.28);
         }
 
         body {
@@ -117,38 +128,66 @@
             width: 55%;
         }
 
-        .dropdown-menu {
-            display: block !important; 
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-30px) scale(1);
-            pointer-events: none;
-            transition: opacity 0.2s cubic-bezier(1, 0, 0.2, 1),
-                        transform 0.2s cubic-bezier(1, 0, 0.2, 1),
-                        visibility 0.2s ease-in-out;
+        /* Fancy fade/scale dropdown transition — desktop only (matches navbar-expand-lg's
+           breakpoint, where Bootstrap switches the dropdown to position:absolute so it
+           floats over the page). Below that, the menu is position:static and stacked
+           inside the collapsed mobile nav, so forcing display:block here would keep
+           reserving empty vertical space even while "hidden" — that was the gap. */
+        @media (min-width: 992px) {
+            .dropdown-menu {
+                display: block !important;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-30px) scale(1);
+                pointer-events: none;
+                transition: opacity 0.2s cubic-bezier(1, 0, 0.2, 1),
+                            transform 0.2s cubic-bezier(1, 0, 0.2, 1),
+                            visibility 0.2s ease-in-out;
+            }
+
+            .dropdown-menu.show {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0) scale(1);
+                pointer-events: auto;
+                transition: opacity 0.3s cubic-bezier(0, 0, 0.2, 1),
+                            transform 0.3s cubic-bezier(0, 0, 0.2, 1),
+                            visibility 0.3s ease-out;
+            }
+
+            .dropdown-menu.show li:nth-child(1) { transition-delay: 0.05s; }
+            .dropdown-menu.show li:nth-child(2) { transition-delay: 0.09s; }
+            .dropdown-menu.show li:nth-child(3) { transition-delay: 0.13s; }
+            .dropdown-menu.show li:nth-child(4) { transition-delay: 0.17s; }
+            .dropdown-menu.show li:nth-child(5) { transition-delay: 0.21s; }
+            .dropdown-menu.show li:nth-child(6) { transition-delay: 0.25s; }
+            .dropdown-menu.show li:nth-child(7) { transition-delay: 0.29s; }
+            .dropdown-menu.show li:nth-child(8) { transition-delay: 0.33s; }
         }
 
-        .dropdown-menu.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-            pointer-events: auto;
-            transition: opacity 0.3s cubic-bezier(0, 0, 0.2, 1),
-                        transform 0.3s cubic-bezier(0, 0, 0.2, 1),
-                        visibility 0.3s ease-out;
+        /* Mobile — plain, simple accordion-style toggle inside the collapsed menu */
+        @media (max-width: 991.98px) {
+            .dropdown-menu {
+                display: none;
+                border: none;
+                box-shadow: none;
+                background: transparent !important;
+                padding-left: 0.75rem;
+            }
+
+            .dropdown-menu.show {
+                display: block;
+                animation: hero3d-dropdown-mobile-in 0.25s ease-out;
+            }
+
+            @keyframes hero3d-dropdown-mobile-in {
+                from { opacity: 0; transform: translateY(-6px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
         }
-        
-        .dropdown-menu.show li:nth-child(1) { transition-delay: 0.05s; }
-        .dropdown-menu.show li:nth-child(2) { transition-delay: 0.09s; }
-        .dropdown-menu.show li:nth-child(3) { transition-delay: 0.13s; }
-        .dropdown-menu.show li:nth-child(4) { transition-delay: 0.17s; }
-        .dropdown-menu.show li:nth-child(5) { transition-delay: 0.21s; }
-        .dropdown-menu.show li:nth-child(6) { transition-delay: 0.25s; }
-        .dropdown-menu.show li:nth-child(7) { transition-delay: 0.29s; }
-        .dropdown-menu.show li:nth-child(8) { transition-delay: 0.33s; }
 
         .dropdown-item {
-            border-radius: 0.6rem;
+            border-radius: var(--radius-sm);
             font-weight: 500;
             padding: 0.55rem 0.9rem;
             transition: background 0.3s ease, color 0.3s ease;
@@ -195,7 +234,7 @@
             background: var(--primary-color);
             color: #fff;
             border: none;
-            border-radius: 50px;
+            border-radius: var(--radius-pill);
             padding: 0.75rem 1.75rem;
             transition: all 0.25s ease;
         }
@@ -204,7 +243,7 @@
             background: var(--primary-dark);
             color: #fff;
             transform: translateY(-3px);
-            box-shadow: 0 16px 30px rgba(82, 103, 132, 0.35);
+            box-shadow: var(--shadow-brand);
         }
 
         .btn-brand:active {
@@ -214,7 +253,7 @@
         .btn-outline-brand {
             border: 2px solid var(--primary-color);
             color: var(--primary-color);
-            border-radius: 50px;
+            border-radius: var(--radius-pill);
             padding: 0.7rem 1.7rem;
             background: transparent;
             transition: all 0.25s ease;
@@ -224,7 +263,7 @@
             background: var(--primary-color);
             color: #fff;
             transform: translateY(-3px);
-            box-shadow: 0 14px 26px rgba(82, 103, 132, 0.25);
+            box-shadow: var(--shadow-brand);
         }
 
         .btn-outline-brand:active {
@@ -262,12 +301,46 @@
             background: var(--surface);
         }
 
+        /* ===== Layout utility (replaces repeated inline padding-top/bottom) ===== */
+        .section-py {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+
+        /* ===== Badge utilities (replaces repeated inline badge colors) ===== */
+        .badge-brand,
+        .badge-accent {
+            font-size: 0.75em;
+            border-radius: var(--radius-pill);
+            padding: 0.45em 0.9em;
+            font-weight: 700;
+        }
+
+        .badge-brand {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .badge-accent {
+            background: var(--secondary-color);
+            color: #fff;
+        }
+
+        .badge-soft {
+            background: rgba(82, 103, 132, 0.1);
+            color: var(--primary-color);
+            border-radius: var(--radius-pill);
+            padding: 0.45em 0.9em;
+            font-weight: 700;
+            font-size: 0.78em;
+        }
+
         /* ===== Cards ===== */
         .card-flat {
             background: #fff;
             border: 1px solid var(--primary-color);
-            box-shadow: 0 8px 24px rgba(17, 24, 39, 0.12);
-            border-radius: 1.1rem;
+            box-shadow: var(--shadow-rest);
+            border-radius: var(--radius-lg);
             transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -289,7 +362,7 @@
 
         .card-flat:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(82, 103, 132, 0.25);
+            box-shadow: var(--shadow-brand);
             border-color: var(--secondary-color);
         }
 
@@ -315,10 +388,10 @@
             align-items: center;
             background: #fff;
             border-left: 4px solid var(--primary-color);
-            border-radius: 0.5rem;
+            border-radius: var(--radius-sm);
             padding: 0.55rem 0.9rem;
             margin-bottom: 0.55rem;
-            box-shadow: 0 6px 14px rgba(17, 24, 39, 0.08);
+            box-shadow: var(--shadow-rest);
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
@@ -328,7 +401,7 @@
 
         .list-row:hover {
             transform: translateX(5px);
-            box-shadow: 0 10px 22px rgba(17, 24, 39, 0.13);
+            box-shadow: var(--shadow-hover);
         }
 
         .list-row-accent {
@@ -344,6 +417,59 @@
         .img-thumb-accent {
             box-shadow: 0 10px 24px rgba(17, 24, 39, 0.14);
             border-bottom: 4px solid var(--secondary-color);
+            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .card-flat:hover .img-thumb-accent {
+            transform: scale(1.06);
+        }
+
+        /* ===== Person card (Asisten Laboratorium) — avatar-first, no table ===== */
+        .person-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.35rem;
+        }
+
+        .person-avatar {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            color: #fff;
+            background: linear-gradient(145deg, var(--primary-color), var(--primary-dark));
+            box-shadow: var(--shadow-rest);
+            margin-bottom: 0.6rem;
+        }
+
+        .person-name {
+            font-weight: 800;
+            color: var(--ink);
+            margin-bottom: 0.15rem;
+        }
+
+        .person-role {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .person-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .person-meta .badge-soft {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
         }
 
         /* ===== 3D Hero Illustration (gradient icon cluster w/ float + gloss) ===== */
@@ -438,6 +564,36 @@
         @keyframes hero3d-float-2 { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-10px) rotate(10deg); } }
         @keyframes hero3d-float-3 { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-12px) rotate(-8deg); } }
         @keyframes hero3d-float-4 { 0%, 100% { transform: translateY(0) rotate(5deg); } 50% { transform: translateY(-9px) rotate(7deg); } }
+
+        /* Slow continuous spin — only the gear-ring layer, the figure on top stays still */
+        .hero3d-tile.tile-main {
+            overflow: visible;
+        }
+
+        .hero3d-tile.tile-main .hero3d-gear-ring,
+        .hero3d-tile.tile-main .hero3d-gear-figure {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .hero3d-tile.tile-main .hero3d-gear-ring {
+            animation: hero3d-gear-spin 16s linear infinite;
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes hero3d-gear-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero3d-tile.tile-main .hero3d-gear-ring {
+                animation: none;
+            }
+        }
 
         @media (max-width: 991.98px) {
             .hero3d-stage { max-width: 300px; margin-top: 1.5rem; }
@@ -640,30 +796,6 @@
             background-position: 0 0, 30px 30px;
             position: relative;
         }
-        
-        .wave-divider-bottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-            transform: translateY(1px); 
-        }
-
-        .wave-divider-bottom svg {
-            display: block;
-            width: calc(100% + 1.3px);
-            height: 25px;
-        }
-
-        @media (min-width: 992px) {
-            .wave-divider-bottom svg {
-                height: 40px;
-                width: 120%;
-            }
-        }
-
     </style>
 </head>
 <body>

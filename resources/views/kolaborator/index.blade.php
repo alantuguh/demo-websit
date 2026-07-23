@@ -389,9 +389,7 @@
                         <div class="card h-100 shadow-sm hover-shadow transition-all">
                             <div class="card-body text-center">
                                 <div class="mb-3">
-                                    <div class="rounded-circle bg-primary bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        MH
-                                    </div>
+                                    <img src="{{ asset('images/aldi.JPG') }}" alt="Foto Saya" class="rounded-circle" style="width: 90px; height: 90px; object-fit: cover;">   
                                 </div>
                                 <h5 class="card-title">Muhamad Haikal</h5>
                                 <p class="text-muted mb-2">PTIK UNS</p>
