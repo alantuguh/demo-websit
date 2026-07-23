@@ -5,7 +5,7 @@
 @section('content')
 
     {{-- ===================== HERO ===================== --}}
-    <section class="position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.75) 0%,  rgba(174, 191, 218, 0.75) 100%), url('{{ asset('images/lab.jpg') }}'); padding: 110px 0 90px; background-size: contain; background-position: center;">
+    <section class="position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.75) 0%,  rgba(174, 191, 218, 0.75) 100%), url('{{ asset('images/lab.jpg') }}'); padding: 110px 0 90px; background-size: cover; background-position: center;">
         <div class="container position-relative" style="z-index: 1;">
             <div class="row align-items-center g-5 flex-column-reverse flex-lg-row">
                 <div class="col-lg-7 text-center text-lg-start">

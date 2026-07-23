@@ -271,6 +271,7 @@
             transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
             position: relative;
             overflow: hidden;
+            padding: 5% 0 10%
         }
 
         .card-flat::before {
@@ -346,6 +347,8 @@
         }
 
         /* ===== 3D Hero Illustration (gradient icon cluster w/ float + gloss) ===== */
+   
+
         .hero3d-stage {
             position: relative;
             width: 100%;
@@ -629,7 +632,7 @@
             font-size: 0.88rem;
         }
         .bg-particles {
-            background-color: rgba(195, 208, 227, 0.5); 
+            background-color: rgba(195, 208, 227, 0.25); 
             background-image: 
                 radial-gradient(rgba(176, 99, 13, 0.25) 2.5px, transparent 3px),
                 radial-gradient(rgba(82, 103, 132, 0.2) 2px, transparent 4px);
