@@ -25,8 +25,8 @@
             --secondary-color: rgb(176, 99, 13);
             --accent-color: rgba(195, 208, 227, 1);
             --surface: #f7f9fb;
-            --ink: #1f2937;
-            --muted: #6b7280;
+            --ink: #0f151c;
+            --muted: #282d38;
             --font-heading: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
             --font-body: 'Inter', 'Segoe UI', sans-serif;
 
@@ -787,13 +787,13 @@
             color: rgba(255, 255, 255, 0.55);
             font-size: 0.88rem;
         }
+        
         .bg-particles {
-            background-color: rgba(195, 208, 227, 0.25); 
-            background-image: 
-                radial-gradient(rgba(176, 99, 13, 0.25) 2.5px, transparent 3px),
-                radial-gradient(rgba(82, 103, 132, 0.2) 2px, transparent 4px);
-            background-size: 60px 60px;
-            background-position: 0 0, 30px 30px;
+            background-color: rgba(195, 208, 227, 0.25);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 260' width='260' height='260'%3E%3Cdefs%3E%3Cg id='goniometer' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M-18,10 A20,20 0 0 1 18,10'/%3E%3Cline x1='-18' y1='10' x2='18' y2='10'/%3E%3Cline x1='0' y1='10' x2='13' y2='-10'/%3E%3Ccircle cx='0' cy='10' r='2'/%3E%3Cline x1='-18' y1='10' x2='-16' y2='4.5' stroke-width='1.4'/%3E%3Cline x1='0' y1='-1.3' x2='0' y2='-7' stroke-width='1.4'/%3E%3Cline x1='18' y1='10' x2='16' y2='4.5' stroke-width='1.4'/%3E%3C/g%3E%3Cg id='stopwatch' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='0' cy='2' r='15'/%3E%3Cline x1='0' y1='2' x2='0' y2='-8'/%3E%3Cline x1='0' y1='2' x2='7' y2='6'/%3E%3Cline x1='-4' y1='-16' x2='4' y2='-16'/%3E%3Cline x1='0' y1='-16' x2='0' y2='-13'/%3E%3Cline x1='10' y1='-12' x2='13' y2='-15'/%3E%3C/g%3E%3Cg id='ruler' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='-22' y='-6' width='44' height='12' rx='2'/%3E%3Cline x1='-14' y1='-6' x2='-14' y2='0' stroke-width='1.4'/%3E%3Cline x1='-6' y1='-6' x2='-6' y2='2' stroke-width='1.4'/%3E%3Cline x1='2' y1='-6' x2='2' y2='0' stroke-width='1.4'/%3E%3Cline x1='10' y1='-6' x2='10' y2='2' stroke-width='1.4'/%3E%3Cline x1='18' y1='-6' x2='18' y2='0' stroke-width='1.4'/%3E%3C/g%3E%3Cg id='chair' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M-8,-18 L-8,-2 M-8,-18 Q-8,-22 -4,-22 L4,-22'/%3E%3Crect x='-10' y='-2' width='20' height='4' rx='1'/%3E%3Cline x1='0' y1='2' x2='0' y2='14'/%3E%3Cline x1='-8' y1='18' x2='8' y2='18'/%3E%3Cline x1='0' y1='14' x2='-8' y2='18'/%3E%3Cline x1='0' y1='14' x2='8' y2='18'/%3E%3C/g%3E%3Cg id='clipboard' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='-14' y='-18' width='28' height='36' rx='2'/%3E%3Crect x='-6' y='-21' width='12' height='6' rx='1'/%3E%3Cline x1='-9' y1='-6' x2='9' y2='-6' stroke-width='1.4'/%3E%3Cline x1='-9' y1='2' x2='9' y2='2' stroke-width='1.4'/%3E%3Cline x1='-9' y1='10' x2='3' y2='10' stroke-width='1.4'/%3E%3C/g%3E%3C/defs%3E%3Cuse href='%23goniometer' stroke='rgba(176,99,13,0.42)' transform='translate(55,55) rotate(-8) scale(0.95)'/%3E%3Cuse href='%23stopwatch' stroke='rgba(82,103,132,0.42)' transform='translate(197,58) rotate(6) scale(0.85)'/%3E%3Cuse href='%23ruler' stroke='rgba(82,103,132,0.42)' transform='translate(58,197) rotate(12) scale(0.8)'/%3E%3Cuse href='%23chair' stroke='rgba(176,99,13,0.42)' transform='translate(200,197) rotate(-6) scale(0.9)'/%3E%3Cuse href='%23clipboard' stroke='rgba(82,103,132,0.38)' transform='translate(128,128) rotate(4) scale(0.62)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 260px 260px;
+            background-position: 0 0;
             position: relative;
         }
         .wave-divider-bottom {
