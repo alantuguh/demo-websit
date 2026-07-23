@@ -640,6 +640,30 @@
             background-position: 0 0, 30px 30px;
             position: relative;
         }
+        
+        .wave-divider-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: translateY(1px); 
+        }
+
+        .wave-divider-bottom svg {
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 25px;
+        }
+
+        @media (min-width: 992px) {
+            .wave-divider-bottom svg {
+                height: 40px;
+                width: 120%;
+            }
+        }
+
     </style>
 </head>
 <body>
