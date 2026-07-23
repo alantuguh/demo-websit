@@ -5,15 +5,29 @@
 @section('content')
 
 {{-- ===================== HERO ===================== --}}
-<section class="position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.5) 0%, #aebfda 100%); padding: 110px 0 70px;">
-    <div class="container text-center">
-        <span class="eyebrow" data-aos="fade-up"><i class="fas fa-diagram-project me-1"></i> Kerja Sama & Pengabdian</span>
-        <h1 class="display-5 fw-bold mb-3" style="letter-spacing: -1px;" data-aos="fade-up" data-aos-delay="100">
-            Proyek <span class="text-gradient">Laboratorium</span>
-        </h1>
-        <p class="lead mx-auto" style="max-width: 660px; color: var(--ink);" data-aos="fade-up" data-aos-delay="200">
-            Program dan proyek kerja sama Laboratorium LPSKE, meliputi Wibawa, Jarpak, Semesta, DIKTI, dan Kerja Sama UNS.
-        </p>
+<section class="position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.75) 0%,  rgba(174, 191, 218, 0.75) 100%), url('{{ asset('images/lab.jpg') }}'); padding: 110px 0 90px; background-size: contain; background-position: center;">
+    <div class="container">
+        <div class="row align-items-center g-5 flex-column-reverse flex-lg-row">
+            <div class="col-lg-7 text-center text-lg-start">
+                <span class="eyebrow" data-aos="fade-up"><i class="fas fa-diagram-project me-1"></i> Kerja Sama & Pengabdian</span>
+                <h1 class="display-5 fw-bold mb-3" style="letter-spacing: -1px;" data-aos="fade-up" data-aos-delay="100">
+                    Proyek <span class="text-gradient">Laboratorium</span>
+                </h1>
+                <p class="lead mx-auto mx-lg-0" style="max-width: 580px; color: var(--ink);" data-aos="fade-up" data-aos-delay="200">
+                    Program dan proyek kerja sama Laboratorium LPSKE, meliputi Wibawa, Jarpak, Semesta, DIKTI, dan Kerja Sama UNS.
+                </p>
+            </div>
+            <div class="col-lg-5 mx-auto text-center">
+                <div class="hero3d-stage" data-aos="fade-left" data-aos-delay="150">
+                    <span class="hero3d-orb o1"></span>
+                    <span class="hero3d-orb o2"></span>
+                    <div class="hero3d-tile tile-main g-primary" title="Proyek"><i class="fas fa-diagram-project"></i></div>
+                    <div class="hero3d-tile tile-1 g-secondary" title="Kerja Sama"><i class="fas fa-handshake"></i></div>
+                    <div class="hero3d-tile tile-2 g-accent" title="Progres"><i class="fas fa-chart-line"></i></div>
+                    <div class="hero3d-tile tile-3 g-light" title="Checklist"><i class="fas fa-list-check"></i></div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 

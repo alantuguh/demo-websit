@@ -3,15 +3,29 @@
 @section('content')
 
 {{-- ===================== HERO ===================== --}}
-<section class="position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.5) 0%, #aebfda 100%); padding: 110px 0 70px;">
-    <div class="container text-center">
-        <span class="eyebrow" data-aos="fade-up"><i class="fas fa-users me-1"></i> Tim Kami</span>
-        <h1 class="display-5 fw-bold mb-3" style="letter-spacing: -1px;" data-aos="fade-up" data-aos-delay="100">
-            Tim <span class="text-gradient">Laboratorium</span>
-        </h1>
-        <p class="lead mx-auto" style="max-width: 620px; color: var(--ink);" data-aos="fade-up" data-aos-delay="200">
-            Kepala laboratorium, dosen pembina, dan asisten yang mendukung kegiatan akademik, praktikum, serta penelitian di LPSKE.
-        </p>
+<section class="position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.75) 0%,  rgba(174, 191, 218, 0.75) 100%), url('{{ asset('images/lab.jpg') }}'); padding: 110px 0 90px; background-size: contain; background-position: center;">
+    <div class="container">
+        <div class="row align-items-center g-5 flex-column-reverse flex-lg-row">
+            <div class="col-lg-7 text-center text-lg-start">
+                <span class="eyebrow" data-aos="fade-up"><i class="fas fa-users me-1"></i> Tim Kami</span>
+                <h1 class="display-5 fw-bold mb-3" style="letter-spacing: -1px;" data-aos="fade-up" data-aos-delay="100">
+                    Tim <span class="text-gradient">Laboratorium</span>
+                </h1>
+                <p class="lead mx-auto mx-lg-0" style="max-width: 560px; color: var(--ink);" data-aos="fade-up" data-aos-delay="200">
+                    Kepala laboratorium, dosen pembina, dan asisten yang mendukung kegiatan akademik, praktikum, serta penelitian di LPSKE.
+                </p>
+            </div>
+            <div class="col-lg-5 mx-auto text-center">
+                <div class="hero3d-stage" data-aos="fade-left" data-aos-delay="150">
+                    <span class="hero3d-orb o1"></span>
+                    <span class="hero3d-orb o2"></span>
+                    <div class="hero3d-tile tile-main g-primary" title="Asisten"><i class="fas fa-user-graduate"></i></div>
+                    <div class="hero3d-tile tile-1 g-secondary" title="Kepala Laboratorium"><i class="fas fa-user-tie"></i></div>
+                    <div class="hero3d-tile tile-2 g-accent" title="Dosen"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div class="hero3d-tile tile-3 g-light" title="ID Anggota"><i class="fas fa-id-badge"></i></div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 

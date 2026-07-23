@@ -345,6 +345,105 @@
             border-bottom: 4px solid var(--secondary-color);
         }
 
+        /* ===== 3D Hero Illustration (gradient icon cluster w/ float + gloss) ===== */
+        .hero3d-stage {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1 / 1;
+            margin: 0 auto;
+        }
+
+        .hero3d-orb {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero3d-orb.o1 { width: 230px; height: 230px; top: -8%; left: -12%; background: var(--accent-color); opacity: 0.55; }
+        .hero3d-orb.o2 { width: 110px; height: 110px; bottom: -4%; right: -4%; background: var(--secondary-color); opacity: 0.16; }
+
+        .hero3d-badge {
+            position: absolute;
+            top: 2%;
+            right: 0;
+            z-index: 5;
+            background: var(--secondary-color);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.5em 1.15em;
+            border-radius: 50px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .hero3d-tile {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30%;
+            box-shadow:
+                0 22px 40px -8px rgba(17, 24, 39, 0.35),
+                inset 0 2px 3px rgba(255, 255, 255, 0.45),
+                inset 0 -10px 16px rgba(0, 0, 0, 0.15);
+            z-index: 2;
+        }
+
+        .hero3d-tile::after {
+            content: '';
+            position: absolute;
+            top: 12%;
+            left: 16%;
+            width: 34%;
+            height: 20%;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            filter: blur(3px);
+            transform: rotate(-20deg);
+            pointer-events: none;
+        }
+
+        .hero3d-tile i {
+            color: #fff;
+            filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.28));
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero3d-tile.g-primary { background: radial-gradient(circle at 32% 26%, #8ea0bc 0%, var(--primary-color) 55%, var(--primary-dark) 100%); }
+        .hero3d-tile.g-secondary { background: radial-gradient(circle at 32% 26%, #e6a751 0%, var(--secondary-color) 58%, #7c4909 100%); }
+        .hero3d-tile.g-accent { background: radial-gradient(circle at 32% 26%, #eef2f8 0%, var(--accent-color) 60%, #9fb2ce 100%); }
+        .hero3d-tile.g-accent i { color: var(--primary-color); filter: drop-shadow(0 2px 2px rgba(255, 255, 255, 0.5)); }
+        .hero3d-tile.g-light { background: radial-gradient(circle at 32% 26%, #ffffff 0%, #eef2f7 55%, var(--accent-color) 100%); }
+        .hero3d-tile.g-light i { color: var(--secondary-color); filter: none; }
+
+        .hero3d-tile.tile-main { width: 48%; height: 48%; left: 26%; top: 24%; font-size: 2.6rem; z-index: 3; animation: hero3d-float-1 6.5s ease-in-out infinite; }
+        .hero3d-tile.tile-main i { font-size: 2.6rem; }
+
+        .hero3d-tile.tile-1 { width: 30%; height: 30%; left: -4%; top: 8%; font-size: 1.5rem; animation: hero3d-float-2 5s ease-in-out infinite; animation-delay: 0.3s; }
+        .hero3d-tile.tile-1 i { font-size: 1.5rem; }
+
+        .hero3d-tile.tile-2 { width: 27%; height: 27%; right: -3%; top: 10%; font-size: 1.3rem; animation: hero3d-float-3 5.5s ease-in-out infinite; animation-delay: 0.9s; }
+        .hero3d-tile.tile-2 i { font-size: 1.3rem; }
+
+        .hero3d-tile.tile-3 { width: 26%; height: 26%; left: 8%; bottom: -2%; font-size: 1.25rem; z-index: 4; animation: hero3d-float-4 5.2s ease-in-out infinite; animation-delay: 1.4s; }
+        .hero3d-tile.tile-3 i { font-size: 1.25rem; }
+
+        @keyframes hero3d-float-1 { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-14px) rotate(-6deg); } }
+        @keyframes hero3d-float-2 { 0%, 100% { transform: translateY(0) rotate(8deg); } 50% { transform: translateY(-10px) rotate(10deg); } }
+        @keyframes hero3d-float-3 { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-12px) rotate(-8deg); } }
+        @keyframes hero3d-float-4 { 0%, 100% { transform: translateY(0) rotate(5deg); } 50% { transform: translateY(-9px) rotate(7deg); } }
+
+        @media (max-width: 991.98px) {
+            .hero3d-stage { max-width: 300px; margin-top: 1.5rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero3d-tile { animation: none; }
+        }
+
         /* ===== Stats ===== */
         .stat-number {
             font-family: var(--font-heading);

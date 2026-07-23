@@ -3,7 +3,7 @@
 @section('content')
 
     {{-- ===================== HERO ===================== --}}
-    <section class="position-relative overflow-hidden" id="home" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.5) 0%, #aebfda 100%); padding: 110px 0 90px;">
+    <section class="position-relative overflow-hidden" id="home" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.75) 0%,  rgba(174, 191, 218, 0.75) 100%), url('{{ asset('images/lab.jpg') }}'); padding: 110px 0 90px; background-size: contain; background-position: center;">
         <div class="container">
             <div class="row align-items-center g-5 flex-column-reverse flex-lg-row">
                 <div class="col-lg-6 text-center text-lg-start">
@@ -24,12 +24,14 @@
                     </div>
                 </div>
                 <div class="col-lg-5 mx-auto text-center">
-                    <div class="position-relative d-inline-block" data-aos="fade-left" data-aos-delay="150">
-                        <div class="position-absolute" style="width: 220px; height: 220px; border-radius: 50%; background: var(--accent-color); opacity: 0.5; top: -30px; left: -30px; z-index: 0;"></div>
-                        <img src="{{ asset('images/title_lpske.png') }}" alt="LPSKE" class="img-fluid rounded-4 img-hero-accent position-relative" style="max-height: 340px; object-fit: contain; background: #fff; padding: 1.5rem; z-index: 1;">
-                        <span class="position-absolute top-0 end-0 translate-middle badge rounded-pill shadow" style="background: var(--secondary-color); font-size: 0.9rem; padding: 0.7em 1.3em; z-index: 2;">
-                            <i class="fas fa-flask me-1"></i> LPSKE
-                        </span>
+                    <div class="hero3d-stage" data-aos="fade-left" data-aos-delay="150">
+                        <span class="hero3d-orb o1"></span>
+                        <span class="hero3d-orb o2"></span>
+                        <div class="hero3d-tile tile-main g-primary" title="Ergonomi"><img src="{{ asset('images/title_lpske.png') }}"></img></div>
+                        <div class="hero3d-tile tile-1 g-secondary" title="Laboratorium"><i class="fas fa-flask"></i></div>
+                        <div class="hero3d-tile tile-2 g-accent" title="Antropometri"><i class="fas fa-ruler-combined"></i></div>
+                        <div class="hero3d-tile tile-3 g-light" title="Sistem Kerja"><i class="fas fa-gear"></i></div>
+                        <span class="hero3d-badge"><i class="fas fa-flask me-1"></i> LPSKE</span>
                     </div>
                 </div>
             </div>

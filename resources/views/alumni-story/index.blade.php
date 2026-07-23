@@ -5,19 +5,29 @@
 @section('content')
 
     {{-- ===================== HERO / HEADER BAND ===================== --}}
-    <section class="page-header-band position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.5) 0%, #aebfda 100%); padding: 100px 0 60px;">
+    <section class="page-header-band position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.75) 0%,  rgba(174, 191, 218, 0.75) 100%), url('{{ asset('images/lab.jpg') }}'); padding: 110px 0 90px; background-size: contain; background-position: center;">
         <div class="container position-relative" style="z-index: 1;">
-            <div class="row align-items-center">
-                <div class="col-lg-8 mx-auto text-center">
+            <div class="row align-items-center g-5 flex-column-reverse flex-lg-row">
+                <div class="col-lg-7 mx-auto text-center text-lg-start">
                     <span class="eyebrow" data-aos="fade-up">
                         <i class="fas fa-graduation-cap me-1"></i> Jejak Alumni
                     </span>
                     <h1 class="display-5 fw-bold mb-3" data-aos="fade-up" data-aos-delay="100">
                         Alumni <span class="text-gradient">Stories</span>
                     </h1>
-                    <p class="lead mb-0" style="color: var(--ink);" data-aos="fade-up" data-aos-delay="200">
+                    <p class="lead mb-0 mx-auto mx-lg-0" style="max-width: 560px; color: var(--ink);" data-aos="fade-up" data-aos-delay="200">
                         Kisah inspiratif dan perjalanan karier alumni Laboratorium Perancangan Sistem Kerja dan Ergonomi (LPSKE).
                     </p>
+                </div>
+                <div class="col-lg-5 mx-auto text-center">
+                    <div class="hero3d-stage" data-aos="fade-left" data-aos-delay="150">
+                        <span class="hero3d-orb o1"></span>
+                        <span class="hero3d-orb o2"></span>
+                        <div class="hero3d-tile tile-main g-primary" title="Alumni"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="hero3d-tile tile-1 g-secondary" title="Ijazah"><i class="fas fa-scroll"></i></div>
+                        <div class="hero3d-tile tile-2 g-accent" title="Jaringan Alumni"><i class="fas fa-share-nodes"></i></div>
+                        <div class="hero3d-tile tile-3 g-light" title="Karier"><i class="fas fa-briefcase"></i></div>
+                    </div>
                 </div>
             </div>
         </div>
