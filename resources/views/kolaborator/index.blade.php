@@ -1,477 +1,277 @@
 @extends('layout.app')
 
 @section('content')
-<section class="py-5">
+
+{{-- ===================== HERO ===================== --}}
+<section class="page-header-band position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.75) 0%,  rgba(174, 191, 218, 0.75) 100%), url('{{ asset('images/lab.jpg') }}'); padding: 110px 0 90px; background-size: cover; background-position: center;">
     <div class="container">
-        <h1 class="section-title">Tim Kolaborator Proyek</h1>
-        <p class="lead mb-5 text-muted">Orang-orang luar biasa yang terlibat dalam pengembangan website LPSKE ini</p>
-        
-        <!-- Navigation Tabs -->
-        <ul class="nav nav-tabs mb-4" id="kolaboratorTabs" role="tablist">
+        <div class="row align-items-center g-5 flex-column-reverse flex-lg-row">
+            <div class="col-lg-7 text-center text-lg-start">
+                <span class="eyebrow" data-aos="fade-up"><i class="fas fa-handshake me-1"></i> Kolaborasi</span>
+                <h1 class="display-5 fw-bold mb-3" style="letter-spacing: -1px;" data-aos="fade-up" data-aos-delay="100">
+                    Tim <span class="text-gradient">Kolaborator</span> Proyek
+                </h1>
+                <p class="lead mx-auto mx-lg-0" style="max-width: 560px; color: var(--ink);" data-aos="fade-up" data-aos-delay="200">
+                    Orang-orang luar biasa yang terlibat dalam pengembangan website LPSKE ini.
+                </p>
+            </div>
+            <div class="col-lg-5 mx-auto text-center">
+                <div class="hero3d-stage" data-aos="fade-left" data-aos-delay="150">
+                    <span class="hero3d-orb o1"></span>
+                    <span class="hero3d-orb o2"></span>
+                    <div class="hero3d-tile tile-main g-primary" title="Kolaborasi"><i class="fas fa-handshake"></i></div>
+                    <div class="hero3d-tile tile-1 g-secondary" title="Tim"><i class="fas fa-users"></i></div>
+                    <div class="hero3d-tile tile-2 g-accent" title="Pengembangan"><i class="fas fa-code"></i></div>
+                    <div class="hero3d-tile tile-3 g-light" title="Apresiasi"><i class="fas fa-star"></i></div>
+                </div>
+            </div>
+            <div class="wave-divider-bottom">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.45,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C79.44,114.28,154.58,109.11,218.4,92.83c31.11-7.92,61.85-18.7,92.93-29.21Z" fill="rgba(112, 133, 177, 0.7)"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- ===================== TABS & CONTRIBUTOR CARDS ===================== --}}
+<section class="bg-particles" style="padding-top: 4rem; padding-bottom: 6rem;">
+    <div class="container">
+
+        {{-- Navigation Tabs --}}
+        <ul class="nav nav-pills justify-content-center mb-5 gap-2 collab-tabs" id="kolaboratorTabs" role="tablist" data-aos="fade-up">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" 
-                        id="smk2-tab" 
-                        data-bs-toggle="tab" 
-                        data-bs-target="#smk2" 
-                        type="button" 
-                        role="tab" 
-                        aria-controls="smk2" 
-                        aria-selected="true">
-                    SMK N 2 Surakarta
+                <button class="nav-link active" id="smk2-tab" data-bs-toggle="tab" data-bs-target="#smk2" type="button" role="tab" aria-controls="smk2" aria-selected="true">
+                    <i class="fas fa-school me-2"></i>SMK N 2 Surakarta
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" 
-                        id="enuma-tab" 
-                        data-bs-toggle="tab" 
-                        data-bs-target="#enuma" 
-                        type="button" 
-                        role="tab" 
-                        aria-controls="enuma" 
-                        aria-selected="false">
-                    Enuma Technology
+                <button class="nav-link" id="enuma-tab" data-bs-toggle="tab" data-bs-target="#enuma" type="button" role="tab" aria-controls="enuma" aria-selected="false">
+                    <i class="fas fa-building me-2"></i>Enuma Technology
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" 
-                        id="aslab-tab" 
-                        data-bs-toggle="tab" 
-                        data-bs-target="#aslab" 
-                        type="button" 
-                        role="tab" 
-                        aria-controls="aslab" 
-                        aria-selected="false">
-                    Asisten Laboratorium LPSKE
+                <button class="nav-link" id="aslab-tab" data-bs-toggle="tab" data-bs-target="#aslab" type="button" role="tab" aria-controls="aslab" aria-selected="false">
+                    <i class="fas fa-flask me-2"></i>Asisten Laboratorium LPSKE
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" 
-                        id="mersif-tab" 
-                        data-bs-toggle="tab" 
-                        data-bs-target="#mersif" 
-                        type="button" 
-                        role="tab" 
-                        aria-controls="mersif" 
-                        aria-selected="false">
-                    Mersiflab
+                <button class="nav-link" id="mersif-tab" data-bs-toggle="tab" data-bs-target="#mersif" type="button" role="tab" aria-controls="mersif" aria-selected="false">
+                    <i class="fas fa-microscope me-2"></i>Mersiflab
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" 
-                        id="ptik-tab" 
-                        data-bs-toggle="tab" 
-                        data-bs-target="#ptik" 
-                        type="button" 
-                        role="tab" 
-                        aria-controls="ptik" 
-                        aria-selected="false">
-                    PTIK
+                <button class="nav-link" id="ptik-tab" data-bs-toggle="tab" data-bs-target="#ptik" type="button" role="tab" aria-controls="ptik" aria-selected="false">
+                    <i class="fas fa-laptop-code me-2"></i>PTIK
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" 
-                        id="smkn6-tab" 
-                        data-bs-toggle="tab" 
-                        data-bs-target="#smkn6" 
-                        type="button" 
-                        role="tab" 
-                        aria-controls="smkn6" 
-                        aria-selected="false">
-                    SMK N 6 Surakarta
+                <button class="nav-link" id="smkn6-tab" data-bs-toggle="tab" data-bs-target="#smkn6" type="button" role="tab" aria-controls="smkn6" aria-selected="false">
+                    <i class="fas fa-school me-2"></i>SMK N 6 Surakarta
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" 
-                        id="sportflux-tab" 
-                        data-bs-toggle="tab" 
-                        data-bs-target="#sportflux" 
-                        type="button" 
-                        role="tab" 
-                        aria-controls="sportflux" 
-                        aria-selected="false">
-                    Sportflux
+                <button class="nav-link" id="sportflux-tab" data-bs-toggle="tab" data-bs-target="#sportflux" type="button" role="tab" aria-controls="sportflux" aria-selected="false">
+                    <i class="fas fa-person-running me-2"></i>Sportflux
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" 
-                        id="brainova-tab" 
-                        data-bs-toggle="tab" 
-                        data-bs-target="#brainova" 
-                        type="button" 
-                        role="tab" 
-                        aria-controls="brainova" 
-                        aria-selected="false">
-                    Brainova
+                <button class="nav-link" id="brainova-tab" data-bs-toggle="tab" data-bs-target="#brainova" type="button" role="tab" aria-controls="brainova" aria-selected="false">
+                    <i class="fas fa-brain me-2"></i>Brainova
                 </button>
             </li>
         </ul>
-        <!-- Tab Content -->
+
         <div class="tab-content" id="kolaboratorTabsContent">
-            <!-- Developer Tab -->
-            <div class="tab-pane fade show active" 
-                 id="smk2" 
-                 role="tabpanel" 
-                 aria-labelledby="smk2-tab">
-                <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-    <div class="card h-100 shadow-sm hover-shadow transition-all">
-        <div class="card-body text-center">
-            <div class="mb-3">
-                <img src="{{ asset('images/fael.jpeg') }}" alt="Foto Saya" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
-            </div>
-                                <h5 class="card-title">Zafael Felix Putra Kurniawan</h5>
-                                <p class="text-muted mb-2">Kelas 12 PPLG B/SMK N 2 Surakarta</p>
-                                <p>2025/2026</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 shadow-sm hover-shadow transition-all">
-        <div class="card-body text-center">
-            <div class="mb-3">
-                <img src="{{ asset('images/rayhan.jpeg') }}" alt="Foto Saya" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
-            </div>
-                                <h5 class="card-title">Rayhan Hafidz Adrian</h5>
-                                <p class="text-muted mb-2">Kelas 12 PPLG B/SMK N 2 Surakarta</p>
-                                <p>2025/2026</p>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-    <div class="card h-100 shadow-sm hover-shadow transition-all">
-        <div class="card-body text-center">
-            <div class="mb-3">
-                <img src="{{ asset('images/eyud.jpeg') }}" alt="Foto Saya" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
-            </div>
-                                <h5 class="card-title">Philipus Radittya Tri Rudianto</h5>
-                                <p class="text-muted mb-2">Kelas 12 PPLG B/SMK N 2 Surakarta</p>
-                                <p>2025/2026</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-    <div class="card h-100 shadow-sm hover-shadow transition-all">
-        <div class="card-body text-center">
-            <div class="mb-3">
-                <img src="{{ asset('images/bobby.jpeg') }}" alt="Foto Saya" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
-            </div>
-                                <h5 class="card-title">Ganendra Boby Enza Anshori</h5>
-                                <p class="text-muted mb-2">Kelas 12 PPLG A/SMK N 2 Surakarta</p>
-                                <p>2025/2026</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-    <div class="card h-100 shadow-sm hover-shadow transition-all">
-        <div class="card-body text-center">
-            <div class="mb-3">
-                <img src="{{ asset('images/bagas.jpg') }}" alt="Foto Saya" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
-            </div>
-                                <h5 class="card-title"> Angga Bagas Pratama</h5>
-                                <p class="text-muted mb-2">Kelas 12 PPLG B/SMK N 2 Surakarta</p>
-                                <p>2025/2026</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            
-           <!-- Designer Tab -->
-<div class="tab-pane fade" 
-     id="enuma" 
-     role="tabpanel" 
-     aria-labelledby="enuma-tab">
-    <div class="row g-4">
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm hover-shadow transition-all">
-                <div class="card-body text-center">
-                    <div class="mb-3">
-                        <!-- Foto profil -->
-                        <img src="{{ asset('images/pakAndre.jpeg') }}" 
-                             alt="Foto saya" 
-                             class="rounded-circle" 
-                             style="width: 80px; height: 80px; object-fit: cover;">
-                    </div>
-                    <h5 class="card-title">Andreas Wegiq Adia Hendix</h5>
-                    <p class="text-muted mb-2">Pimpinan Industri Enuma Technology</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-            
-            <!-- Supervisor Tab -->
-            <div class="tab-pane fade" 
-                 id="aslab" 
-                 role="tabpanel" 
-                 aria-labelledby="aslab-tab">
+            {{-- SMK N 2 Surakarta Tab --}}
+            <div class="tab-pane fade show active" id="smk2" role="tabpanel" aria-labelledby="smk2-tab">
                 <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-info bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        I
-                                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <img src="{{ asset('images/fael.jpeg') }}" alt="Zafael Felix Putra Kurniawan" class="person-avatar" style="object-fit: cover;">
+                                <h5 class="person-name">Zafael Felix Putra Kurniawan</h5>
+                                <p class="person-role">Kelas 12 PPLG B/SMK N 2 Surakarta</p>
+                                <div class="person-meta">
+                                    <span class="badge-soft"><i class="fas fa-calendar-alt"></i> 2025/2026</span>
                                 </div>
-                                <h5 class="card-title">Immanuel</h5>
-                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-primary bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        S
-                                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <img src="{{ asset('images/rayhan.jpeg') }}" alt="Rayhan Hafidz Adrian" class="person-avatar" style="object-fit: cover;">
+                                <h5 class="person-name">Rayhan Hafidz Adrian</h5>
+                                <p class="person-role">Kelas 12 PPLG B/SMK N 2 Surakarta</p>
+                                <div class="person-meta">
+                                    <span class="badge-soft"><i class="fas fa-calendar-alt"></i> 2025/2026</span>
                                 </div>
-                                <h5 class="card-title">Sheggy</h5>
-                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-success bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        D
-                                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <img src="{{ asset('images/eyud.jpeg') }}" alt="Philipus Radittya Tri Rudianto" class="person-avatar" style="object-fit: cover;">
+                                <h5 class="person-name">Philipus Radittya Tri Rudianto</h5>
+                                <p class="person-role">Kelas 12 PPLG B/SMK N 2 Surakarta</p>
+                                <div class="person-meta">
+                                    <span class="badge-soft"><i class="fas fa-calendar-alt"></i> 2025/2026</span>
                                 </div>
-                                <h5 class="card-title">Dzaki</h5>
-                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-warning bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        K
-                                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="240">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <img src="{{ asset('images/bobby.jpeg') }}" alt="Ganendra Boby Enza Anshori" class="person-avatar" style="object-fit: cover;">
+                                <h5 class="person-name">Ganendra Boby Enza Anshori</h5>
+                                <p class="person-role">Kelas 12 PPLG A/SMK N 2 Surakarta</p>
+                                <div class="person-meta">
+                                    <span class="badge-soft"><i class="fas fa-calendar-alt"></i> 2025/2026</span>
                                 </div>
-                                <h5 class="card-title">Kezia</h5>
-                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-danger bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        C
-                                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="320">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <img src="{{ asset('images/bagas.jpg') }}" alt="Angga Bagas Pratama" class="person-avatar" style="object-fit: cover;">
+                                <h5 class="person-name">Angga Bagas Pratama</h5>
+                                <p class="person-role">Kelas 12 PPLG B/SMK N 2 Surakarta</p>
+                                <div class="person-meta">
+                                    <span class="badge-soft"><i class="fas fa-calendar-alt"></i> 2025/2026</span>
                                 </div>
-                                <h5 class="card-title">Citta</h5>
-                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-info bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        E
-                                    </div>
-                                </div>
-                                <h5 class="card-title">El Qonita</h5>
-                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-primary bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        N
-                                    </div>
-                                </div>
-                                <h5 class="card-title">Nita</h5>
-                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-success bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        Z
-                                    </div>
-                                </div>
-                                <h5 class="card-title">Zarith</h5>
-                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-danger bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        H
-                                    </div>
-                                </div>
-                                <h5 class="card-title">Haris</h5>
-                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-warning bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        R
-                                    </div>
-                                </div>
-                                <h5 class="card-title">Rafa</h5>
-                                <p class="text-muted mb-2">Asisten Lab Lpske</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Mersiflab Tab -->
-            <div class="tab-pane fade" 
-                 id="mersif" 
-                 role="tabpanel" 
-                 aria-labelledby="mersif-tab">
+            {{-- Enuma Technology Tab --}}
+            <div class="tab-pane fade" id="enuma" role="tabpanel" aria-labelledby="enuma-tab">
                 <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-info bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                                        <i class="fas fa-user-tie text-white" style="font-size: 2rem;"></i>
-                                    </div>
-                                </div>
-                                <h5 class="card-title">Rozin</h5>
-                                <p class="text-muted mb-2">Pimpinan Mersiflab</p>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <img src="{{ asset('images/pakAndre.jpeg') }}" alt="Andreas Wegiq Adia Hendix" class="person-avatar" style="object-fit: cover;">
+                                <h5 class="person-name">Andreas Wegiq Adia Hendix</h5>
+                                <p class="person-role">Pimpinan Industri Enuma Technology</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- PTIK Tab -->
-            <div class="tab-pane fade" 
-                 id="ptik" 
-                 role="tabpanel" 
-                 aria-labelledby="ptik-tab">
+            {{-- Asisten Laboratorium LPSKE Tab --}}
+            <div class="tab-pane fade" id="aslab" role="tabpanel" aria-labelledby="aslab-tab">
                 <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-primary bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        AT
-                                    </div>
-                                </div>
-                                <h5 class="card-title">Alan Tuguh</h5>
-                                <p class="text-muted mb-2">PTIK UNS</p>
+                    @foreach(['Immanuel', 'Sheggy', 'Dzaki', 'Kezia', 'Citta', 'El Qonita', 'Nita', 'Zarith', 'Haris', 'Rafa'] as $i => $nama)
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ min($i, 5) * 80 }}">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <div class="person-avatar">{{ strtoupper(substr($nama, 0, 1)) }}</div>
+                                <h5 class="person-name">{{ $nama }}</h5>
+                                <p class="person-role">Asisten Lab Lpske</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <img src="{{ asset('images/aldi.JPG') }}" alt="Foto Saya" class="rounded-circle" style="width: 90px; height: 90px; object-fit: cover;">   
-                                </div>
-                                <h5 class="card-title">Muhamad Haikal</h5>
-                                <p class="text-muted mb-2">PTIK UNS</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-primary bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        ND
-                                    </div>
-                                </div>
-                                <h5 class="card-title">Naufal Daaris</h5>
-                                <p class="text-muted mb-2">PTIK UNS</p>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- Mersiflab Tab --}}
+            <div class="tab-pane fade" id="mersif" role="tabpanel" aria-labelledby="mersif-tab">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <div class="person-avatar"><i class="fas fa-user-tie"></i></div>
+                                <h5 class="person-name">Rozin</h5>
+                                <p class="person-role">Pimpinan Mersiflab</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SMK N 6 Surakarta Tab -->
-            <div class="tab-pane fade" 
-                 id="smkn6" 
-                 role="tabpanel" 
-                 aria-labelledby="smkn6-tab">
+            {{-- PTIK Tab --}}
+            <div class="tab-pane fade" id="ptik" role="tabpanel" aria-labelledby="ptik-tab">
                 <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-success bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        S
-                                    </div>
-                                </div>
-                                <h5 class="card-title">Nama Kontributor</h5>
-                                <p class="text-muted mb-2">SMK N 6 Surakarta</p>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <div class="person-avatar">AT</div>
+                                <h5 class="person-name">Alan Tuguh</h5>
+                                <p class="person-role">PTIK UNS</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <img src="{{ asset('images/aldi.JPG') }}" alt="Muhamad Haikal" class="person-avatar" style="object-fit: cover;">
+                                <h5 class="person-name">Muhamad Haikal</h5>
+                                <p class="person-role">PTIK UNS</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <div class="person-avatar">ND</div>
+                                <h5 class="person-name">Naufal Daaris</h5>
+                                <p class="person-role">PTIK UNS</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Sportflux Tab -->
-            <div class="tab-pane fade" 
-                 id="sportflux" 
-                 role="tabpanel" 
-                 aria-labelledby="sportflux-tab">
+            {{-- SMK N 6 Surakarta Tab --}}
+            <div class="tab-pane fade" id="smkn6" role="tabpanel" aria-labelledby="smkn6-tab">
                 <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-warning bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        S
-                                    </div>
-                                </div>
-                                <h5 class="card-title">Nama Kontributor</h5>
-                                <p class="text-muted mb-2">Sportflux</p>
+                    {{-- TODO: ganti dengan data kontributor asli --}}
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <div class="person-avatar">S</div>
+                                <h5 class="person-name">Nama Kontributor</h5>
+                                <p class="person-role">SMK N 6 Surakarta</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Brainova Tab -->
-            <div class="tab-pane fade" 
-                 id="brainova" 
-                 role="tabpanel" 
-                 aria-labelledby="brainova-tab">
+            {{-- Sportflux Tab --}}
+            <div class="tab-pane fade" id="sportflux" role="tabpanel" aria-labelledby="sportflux-tab">
                 <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-danger bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem; color: #fff; font-weight: bold;">
-                                        B
-                                    </div>
-                                </div>
-                                <h5 class="card-title">Nama Kontributor</h5>
-                                <p class="text-muted mb-2">Brainova</p>
+                    {{-- TODO: ganti dengan data kontributor asli --}}
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <div class="person-avatar">S</div>
+                                <h5 class="person-name">Nama Kontributor</h5>
+                                <p class="person-role">Sportflux</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Brainova Tab --}}
+            <div class="tab-pane fade" id="brainova" role="tabpanel" aria-labelledby="brainova-tab">
+                <div class="row g-4">
+                    {{-- TODO: ganti dengan data kontributor asli --}}
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-flat h-100 p-4">
+                            <div class="person-card">
+                                <div class="person-avatar">B</div>
+                                <h5 class="person-name">Nama Kontributor</h5>
+                                <p class="person-role">Brainova</p>
                             </div>
                         </div>
                     </div>
@@ -480,114 +280,53 @@
 
         </div>
 
-        <!-- Thank You Section -->
-        <div class="mt-5 p-4 bg-light rounded-4">
-            <div class="text-center">
-                <h4 class="text-primary mb-3">
-                    Terima Kasih
-                </h4>
-                <p class="mb-0 text-muted">
-                    Kepada semua pihak yang telah berkontribusi dalam pengembangan website LPSKE ini. 
-                    Tanpa kerja sama dan dedikasi kalian, proyek ini tidak akan terwujud dengan baik.
-                </p>
-            </div>
+        {{-- Thank You --}}
+        <div class="card-flat p-4 p-md-5 text-center mt-5" data-aos="fade-up">
+            <span class="icon-circle mb-3"><i class="fas fa-heart"></i></span>
+            <h4 class="section-title mb-2">Terima Kasih</h4>
+            <p class="text-muted mb-0 mx-auto" style="max-width: 640px;">
+                Kepada semua pihak yang telah berkontribusi dalam pengembangan website LPSKE ini.
+                Tanpa kerja sama dan dedikasi kalian, proyek ini tidak akan terwujud dengan baik.
+            </p>
         </div>
     </div>
 </section>
-            
-            <!-- Mersiflab Tab -->
-            <div class="tab-pane fade" 
-                 id="mersif" 
-                 role="tabpanel" 
-                 aria-labelledby="mersif-tab">
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm hover-shadow transition-all">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <div class="rounded-circle bg-info bg-gradient d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                                        <i class="fas fa-user-tie text-white" style="font-size: 2rem;"></i>
-                                    </div>
-                                </div>
-                                <h5 class="card-title">Rozin</h5>
-                                <p class="text-muted mb-2">Pimpinan Mersiflab</p>
-                             
-                            </div>
-                        </div>
-                    </div>
-                    
-                   
-        
-        <!-- Thank You Section -->
-        <div class="mt-5 p-4 bg-light rounded-4">
-            <div class="text-center">
-                <h4 class="text-primary mb-3">
-                    <i class="fas fa-heart text-danger me-2"></i>
-                    Terima Kasih
-                </h4>
-                <p class="mb-0 text-muted">
-                    Kepada semua pihak yang telah berkontribusi dalam pengembangan website LPSKE ini. 
-                    Tanpa kerja sama dan dedikasi kalian, proyek ini tidak akan terwujud dengan baik.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
+
+@push('styles')
+<style>
+    .collab-tabs .nav-link {
+        color: var(--ink);
+        font-weight: 600;
+        font-size: 0.92rem;
+        padding: 0.65rem 1.4rem;
+        border-radius: 50px;
+        border: 2px solid var(--primary-color);
+        background: transparent;
+        transition: all 0.25s ease;
+    }
+    .collab-tabs .nav-link:hover {
+        background: rgba(82, 103, 132, 0.08);
+    }
+    .collab-tabs .nav-link.active {
+        background: var(--primary-color);
+        color: #fff;
+        box-shadow: 0 10px 22px rgba(82, 103, 132, 0.3);
+    }
+</style>
+@endpush
 
 @push('scripts')
 <script>
-    // Add hover effects and smooth transitions
     document.addEventListener('DOMContentLoaded', function() {
-        const cards = document.querySelectorAll('.hover-shadow');
-        
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        });
+        const hash = window.location.hash;
+        if (hash) {
+            const tabTrigger = document.querySelector(`[data-bs-target="${hash}"]`);
+            if (tabTrigger) {
+                const tab = new bootstrap.Tab(tabTrigger);
+                tab.show();
+            }
+        }
     });
 </script>
 @endpush
-
-<style>
-    .section-title {
-        color: var(--primary-color);
-        font-weight: 700;
-        margin-bottom: 1rem;
-    }
-    
-    .hover-shadow {
-        transition: all 0.3s ease;
-    }
-    
-    .hover-shadow:hover {
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
-    }
-    
-    .transition-all {
-        transition: all 0.3s ease;
-    }
-    
-    .nav-tabs .nav-link {
-        color: var(--primary-color);
-        border: none;
-        border-bottom: 2px solid transparent;
-        font-weight: 500;
-    }
-    
-    .nav-tabs .nav-link.active {
-        background-color: transparent;
-        border-bottom-color: var(--primary-color);
-        color: var(--primary-color);
-    }
-    
-    .nav-tabs .nav-link:hover {
-        border-bottom-color: var(--primary-color);
-        color: var(--primary-color);
-    }
-</style>
 @endsection
