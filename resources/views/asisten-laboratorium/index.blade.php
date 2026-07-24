@@ -87,7 +87,7 @@
                 @if(isset($kepala) && $kepala)
                 <div class="row justify-content-center">
                     <div class="col-lg-8" data-aos="fade-up">
-                        <div class="card-flat overflow-hidden">
+                        <div class="card-flat overflow-hidden" style="padding: 0 0 0;">
                             <div class="row g-0">
                                 <div class="col-md-5">
                                     <img src="{{ $kepala->photo ? asset('storage/' . $kepala->photo) : asset('images/avatar-placeholder.png') }}"
@@ -137,7 +137,7 @@
                 <div class="row g-4">
                     @foreach($dosen as $d)
                     <div class="col-md-6" data-aos="fade-up" data-aos-delay="{{ min($loop->index, 5) * 80 }}">
-                        <div class="card-flat h-100 overflow-hidden">
+                        <div class="card-flat h-100 overflow-hidden" style="padding: 0 0 0;">
                             <div class="row g-0 h-100">
                                 <div class="col-md-4">
                                     <img src="{{ $d->photo ? asset('storage/' . $d->photo) : asset('images/avatar-placeholder.png') }}"

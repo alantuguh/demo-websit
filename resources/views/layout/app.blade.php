@@ -344,7 +344,7 @@
             transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
             position: relative;
             overflow: hidden;
-            padding: 5% 0 10%
+            padding: 0 0 10%;
         }
 
         .card-flat::before {
@@ -836,7 +836,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {{ request()->routeIs('asisten-laboratorium*', 'kepala-laboratorium*', 'dosen-laboratorium*') ? 'active' : ''}}" href="#" id="asistenDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Asisten Laboratorium
+                            Tim Laboratorium
                         </a>
                         <ul class="dropdown-menu" style="background: linear-gradient(180deg, rgba(195, 208, 227, 0.9) 75%, #d9dde4 100%)"aria-labelledby="asistenDropdown">
                             <li><a class="dropdown-item {{ request()->routeIs('asisten-laboratorium') && !request('angkatan') ? 'active' : '' }}" href="{{ route('asisten-laboratorium') }}">Semua Asisten</a></li>

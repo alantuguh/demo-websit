@@ -699,7 +699,7 @@ INSERT INTO `teams` (`id`, `type`, `name`, `nip`, `nim`, `position`, `study_prog
 (61, 'asisten', 'Immanuel Aryo Prasojo', NULL, 'I0323053', NULL, NULL, NULL, NULL, NULL, NULL, 2023, NULL, 0, 1, '2025-10-01 12:43:05', NULL, NULL),
 (62, 'asisten', 'Kezia Vita Christiana', NULL, 'I0323059', NULL, NULL, NULL, NULL, NULL, NULL, 2023, NULL, 0, 1, '2025-10-01 12:43:05', NULL, NULL),
 (63, 'asisten', 'Muhammad Dzaki Suryana', NULL, 'I0323080', NULL, NULL, NULL, NULL, NULL, NULL, 2023, NULL, 0, 1, '2025-10-01 12:43:05', NULL, NULL),
-(64, 'asisten', 'Qonita Annisa\' Aprillia', NULL, 'I0323101', NULL, NULL, NULL, NULL, NULL, NULL, 2023, NULL, 0, 1, '2025-10-01 12:43:05', NULL, NULL),
+(64, 'asisten', 'Qonita Annisa Aprillia', NULL, 'I0323101', NULL, NULL, NULL, NULL, NULL, NULL, 2023, NULL, 0, 1, '2025-10-01 12:43:05', NULL, NULL),
 (65, 'asisten', 'Rafanda Akhta Prapmadi', NULL, 'I0323102', NULL, NULL, NULL, NULL, NULL, NULL, 2023, NULL, 0, 1, '2025-10-01 12:43:05', NULL, NULL),
 (66, 'asisten', 'Zarith Zahwan', NULL, 'I0323121', NULL, NULL, NULL, NULL, NULL, NULL, 2023, NULL, 0, 1, '2025-10-01 12:43:05', NULL, NULL),
 (67, 'asisten', 'Shegy Yuniar Amalia', NULL, 'I0323129', NULL, NULL, NULL, NULL, NULL, NULL, 2023, NULL, 0, 1, '2025-10-01 12:43:05', NULL, NULL),
