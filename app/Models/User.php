@@ -2,15 +2,34 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable, HasRoles;
+
+    /**
+     * Menentukan siapa yang boleh membuka sebuah panel Filament.
+     *
+     * Wajib ada. Bila model User tidak mengimplementasi FilamentUser, Filament
+     * hanya mengizinkan akses saat APP_ENV=local dan menolak dengan 403 di
+     * lingkungan lain — jadi tanpa method ini panel mati begitu aplikasi
+     * dijalankan sebagai production.
+     *
+     * Id ketiga panel (admin/asisten/anggota) sengaja sama persis dengan nilai
+     * kolom `role`, sehingga satu perbandingan sudah cukup: asisten tidak bisa
+     * masuk /admin walaupun kredensialnya benar.
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->role === $panel->getId();
+    }
 
     /**
      * The attributes that are mass assignable.
