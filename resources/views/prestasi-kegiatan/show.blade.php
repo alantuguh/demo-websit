@@ -16,7 +16,7 @@
 @section('content')
 
     {{-- ===================== HERO ===================== --}}
-    <section class="position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.5) 0%, #aebfda 100%); padding: 90px 0 70px;">
+    <section class="page-hero" style="padding: 90px 0 70px;">
         <div class="container position-relative text-center" style="z-index: 1;">
             <span class="eyebrow" data-aos="fade-up">
                 <i class="fas {{ $prestasiKegiatan->jenis === 'prestasi' ? 'fa-trophy' : 'fa-bolt' }} me-1"></i>
@@ -25,7 +25,7 @@
             <h1 class="fw-bold mb-3" style="letter-spacing: -1px; font-size: 2.2rem;" data-aos="fade-up" data-aos-delay="100">
                 {{ $prestasiKegiatan->judul }}
             </h1>
-            <p class="mx-auto mb-0" style="max-width: 620px; color: var(--ink);" data-aos="fade-up" data-aos-delay="200">
+            <p class="mx-auto mb-0" style="max-width: 620px;" data-aos="fade-up" data-aos-delay="200">
                 <i class="far fa-calendar-alt me-1"></i> {{ $prestasiKegiatan->tanggal->format('d F Y') }}
             </p>
         </div>
@@ -74,7 +74,7 @@
                             {!! $prestasiKegiatan->deskripsi !!}
                         </div>
 
-                        <div class="mt-4 pt-4" style="border-top: 1px solid rgba(17,24,39,0.06);">
+                        <div class="mt-4 pt-4" style="border-top: 1px solid var(--hairline);">
                             <a href="{{ route('prestasi-kegiatan.index') }}" class="btn btn-outline-brand">
                                 <i class="fas fa-arrow-left me-2"></i> Kembali ke Daftar
                             </a>
@@ -115,7 +115,7 @@
                         <div class="p-4">
                             <h5 class="fw-bold mb-2">{{ $item->judul }}</h5>
                             <p class="text-muted mb-3">{{ Str::limit(strip_tags($item->deskripsi), 100) }}</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3 pt-2" style="border-top: 1px solid rgba(17,24,39,0.06);">
+                            <div class="d-flex justify-content-between align-items-center mt-3 pt-2" style="border-top: 1px solid var(--hairline);">
                                 <small class="text-muted"><i class="far fa-calendar-alt me-1"></i>{{ $item->tanggal->format('d M Y') }}</small>
                                 <a href="{{ route('prestasi-kegiatan.show', $item) }}" class="btn btn-sm btn-outline-brand px-3">Lihat Detail</a>
                             </div>

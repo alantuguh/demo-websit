@@ -35,8 +35,7 @@ class Logbook extends Model
     public function scopeRecent($query)
     {
         return $query->where('date', '>=', now()->subDay())
-                   ->orderBy('date', 'desc')
-                   ->first();
+                   ->orderBy('date', 'desc');
     }
 
     protected $casts = [

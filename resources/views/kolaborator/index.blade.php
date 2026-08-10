@@ -3,7 +3,7 @@
 @section('content')
 
 {{-- ===================== HERO ===================== --}}
-<section class="page-header-band position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.75) 0%,  rgba(174, 191, 218, 0.75) 100%), url('{{ asset('images/lab.jpg') }}'); padding: 110px 0 90px; background-size: cover; background-position: center;">
+<section class="page-header-band page-hero" style="--hero-photo: url('{{ asset('images/lab.jpg') }}');">
     <div class="container">
         <div class="row align-items-center g-5 flex-column-reverse flex-lg-row">
             <div class="col-lg-7 text-center text-lg-start">
@@ -11,7 +11,7 @@
                 <h1 class="display-5 fw-bold mb-3" style="letter-spacing: -1px;" data-aos="fade-up" data-aos-delay="100">
                     Tim <span class="text-gradient">Kolaborator</span> Proyek
                 </h1>
-                <p class="lead mx-auto mx-lg-0" style="max-width: 560px; color: var(--ink);" data-aos="fade-up" data-aos-delay="200">
+                <p class="lead mx-auto mx-lg-0" style="max-width: 560px;" data-aos="fade-up" data-aos-delay="200">
                     Orang-orang luar biasa yang terlibat dalam pengembangan website LPSKE ini.
                 </p>
             </div>
@@ -27,7 +27,7 @@
             </div>
             <div class="wave-divider-bottom">
                 <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M321.45,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C79.44,114.28,154.58,109.11,218.4,92.83c31.11-7.92,61.85-18.7,92.93-29.21Z" fill="rgba(112, 133, 177, 0.7)"></path>
+                    <path d="M321.45,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C79.44,114.28,154.58,109.11,218.4,92.83c31.11-7.92,61.85-18.7,92.93-29.21Z" fill="rgba(239, 243, 252, 0.94)"></path>
                 </svg>
             </div>
         </div>
@@ -300,17 +300,22 @@
         font-size: 0.92rem;
         padding: 0.65rem 1.4rem;
         border-radius: 50px;
-        border: 2px solid var(--primary-color);
-        background: transparent;
+        border: 1px solid var(--glass-border);
+        background: var(--glass-bg);
+        -webkit-backdrop-filter: blur(12px) saturate(160%);
+        backdrop-filter: blur(12px) saturate(160%);
+        box-shadow: 0 0 0 1px var(--glass-edge);
         transition: all 0.25s ease;
     }
     .collab-tabs .nav-link:hover {
-        background: rgba(82, 103, 132, 0.08);
+        background: rgba(79, 125, 243, 0.14);
+        border-color: rgba(79, 125, 243, 0.45);
     }
     .collab-tabs .nav-link.active {
-        background: var(--primary-color);
+        background: linear-gradient(100deg, var(--primary-color), var(--primary-bright));
+        border-color: transparent;
         color: #fff;
-        box-shadow: 0 10px 22px rgba(82, 103, 132, 0.3);
+        box-shadow: 0 12px 26px rgba(47, 95, 224, 0.34);
     }
 </style>
 @endpush

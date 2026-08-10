@@ -4,6 +4,8 @@ namespace App\Providers\Filament;
 
 use Filament\Panel;
 use Filament\PanelProvider;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View;
 use Filament\Pages;
 use Filament\Navigation\NavigationItem;
 use Filament\Widgets;
@@ -30,7 +32,8 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->authGuard('admin')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::hex('#2f5fe0'),
+                'info' => Color::hex('#0e7490'),
             ])
             ->navigationGroups([
                 'Manajemen Website',
@@ -46,6 +49,10 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
             ])
+            ->renderHook(
+                PanelsRenderHook::HEAD_END,
+                fn (): View => view('filament.panel-theme'),
+            )
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

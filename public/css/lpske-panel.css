@@ -1,0 +1,260 @@
+/* ============================================================================
+   LPSKE — tema kaca untuk panel Filament (admin / asisten / anggota)
+   ----------------------------------------------------------------------------
+   File ini dimuat lewat render hook PanelsRenderHook::HEAD_END, jadi selalu
+   berada SETELAH stylesheet bawaan Filament. Karena spesifisitasnya sama
+   (satu class), urutan sumber yang membuat aturan di bawah ini menang — tidak
+   perlu !important kecuali untuk utility yang di-scope .dark oleh Tailwind.
+
+   Sengaja tidak memakai Tailwind/Vite: server produksi tidak punya Node.js,
+   dan tema kustom Filament mengharuskan proses build. CSS statis ini memberi
+   hasil visual yang sama tanpa toolchain apa pun.
+
+   Palet mengikuti situs publik:
+     biru   #2f5fe0 / #4f7df3     cyan  #0e7490 / #22d3ee
+   ========================================================================== */
+
+:root {
+    --lp-primary: #2f5fe0;
+    --lp-primary-bright: #4f7df3;
+    --lp-primary-dark: #1e3fa8;
+    --lp-cyan: #0e7490;
+    --lp-cyan-bright: #22d3ee;
+
+    --lp-glass-bg: rgba(255, 255, 255, 0.62);
+    --lp-glass-bg-strong: rgba(255, 255, 255, 0.80);
+    --lp-glass-border: rgba(255, 255, 255, 0.72);
+    --lp-glass-edge: rgba(47, 95, 224, 0.14);
+    --lp-glass-blur: 18px;
+    --lp-shadow: 0 8px 30px rgba(20, 40, 90, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* ===== Latar aurora ======================================================
+   Lapisan tetap di belakang seluruh panel — inilah yang di-blur oleh setiap
+   permukaan kaca. Tanpa ini, efek kaca hanya terlihat seperti putih polos. */
+.fi-body {
+    background-color: #eff3fc;
+}
+
+.fi-body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(48rem 32rem at 8% -6%, rgba(79, 125, 243, 0.28), transparent 62%),
+        radial-gradient(40rem 28rem at 96% 2%, rgba(34, 211, 238, 0.26), transparent 64%),
+        radial-gradient(44rem 30rem at 74% 98%, rgba(167, 139, 250, 0.20), transparent 62%);
+}
+
+/* Konten harus berada di atas lapisan aurora */
+.fi-layout,
+.fi-simple-layout {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== Topbar ===== */
+.fi-topbar > nav {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(233, 240, 255, 0.58));
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--lp-glass-border);
+    box-shadow: 0 1px 0 var(--lp-glass-edge), 0 10px 30px rgba(20, 40, 90, 0.06);
+}
+
+/* Garis cahaya tipis di tepi bawah — sama seperti navbar situs publik */
+.fi-topbar > nav::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--lp-cyan-bright), var(--lp-primary-bright), transparent);
+    opacity: 0.6;
+}
+
+/* ===== Sidebar ===== */
+.fi-sidebar-nav {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(233, 240, 255, 0.46));
+    -webkit-backdrop-filter: blur(var(--lp-glass-blur)) saturate(170%);
+    backdrop-filter: blur(var(--lp-glass-blur)) saturate(170%);
+    border-right: 1px solid var(--lp-glass-border);
+}
+
+.fi-sidebar-item-button {
+    border-radius: 0.7rem;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fi-sidebar-item:not(.fi-active) .fi-sidebar-item-button:hover {
+    background: rgba(79, 125, 243, 0.12);
+}
+
+.fi-sidebar-item.fi-active .fi-sidebar-item-button {
+    background: linear-gradient(100deg, var(--lp-primary), var(--lp-primary-bright));
+    box-shadow: 0 10px 22px rgba(47, 95, 224, 0.30);
+}
+
+.fi-sidebar-item.fi-active .fi-sidebar-item-label,
+.fi-sidebar-item.fi-active .fi-sidebar-item-icon {
+    color: #fff;
+}
+
+/* ===== Kartu / section / tabel / widget ===== */
+.fi-section,
+.fi-ta-ctn,
+.fi-wi-stats-overview-stat,
+.fi-fo-component-ctn,
+.fi-modal-window,
+.fi-dropdown-panel {
+    background: var(--lp-glass-bg);
+    -webkit-backdrop-filter: blur(var(--lp-glass-blur)) saturate(160%);
+    backdrop-filter: blur(var(--lp-glass-blur)) saturate(160%);
+    border: 1px solid var(--lp-glass-border);
+    box-shadow: var(--lp-shadow), 0 0 0 1px var(--lp-glass-edge);
+    border-radius: 1rem;
+}
+
+.fi-modal-window,
+.fi-dropdown-panel {
+    background: var(--lp-glass-bg-strong);
+}
+
+.fi-wi-stats-overview-stat {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fi-wi-stats-overview-stat:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 44px rgba(20, 40, 90, 0.16), 0 0 0 1px rgba(34, 211, 238, 0.32);
+}
+
+/* Baris tabel: sorotan lembut, bukan abu-abu datar */
+.fi-ta-row:hover {
+    background: rgba(79, 125, 243, 0.07);
+}
+
+/* ===== Tombol ===== */
+.fi-btn.fi-btn-color-primary {
+    background: linear-gradient(100deg, var(--lp-primary), var(--lp-primary-bright));
+    box-shadow: 0 8px 20px rgba(47, 95, 224, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.fi-btn.fi-btn-color-primary:hover {
+    background: linear-gradient(100deg, var(--lp-primary-dark), var(--lp-primary));
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(47, 95, 224, 0.36);
+}
+
+/* ===== Input ===== */
+.fi-input-wrp {
+    background: rgba(255, 255, 255, 0.72);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 0.65rem;
+    transition: box-shadow 0.2s ease;
+}
+
+.fi-input-wrp:focus-within {
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.45), 0 8px 22px rgba(20, 40, 90, 0.12);
+}
+
+/* ===== Halaman login (fi-simple-layout) ==================================
+   Kartu login berdiri sendiri di tengah layar tanpa sidebar, jadi diberi
+   perlakuan kaca yang lebih tegas supaya aurora di belakangnya terbaca. */
+.fi-simple-main {
+    background: var(--lp-glass-bg-strong);
+    -webkit-backdrop-filter: blur(24px) saturate(170%);
+    backdrop-filter: blur(24px) saturate(170%);
+    border: 1px solid var(--lp-glass-border);
+    box-shadow: 0 24px 60px rgba(20, 40, 90, 0.18), 0 0 0 1px var(--lp-glass-edge);
+    border-radius: 1.25rem;
+}
+
+.fi-simple-header-heading {
+    background: linear-gradient(100deg, var(--lp-primary), var(--lp-cyan-bright));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ===== Mode gelap =========================================================
+   Filament menyediakan mode gelapnya sendiri. Di sini hanya latar yang
+   diselaraskan; sisanya sengaja dibiarkan memakai bawaan Filament agar tidak
+   ada kombinasi warna yang rusak. Selector di-scope .dark supaya spesifisitas
+   cocok dengan utility dark: milik Tailwind. */
+.dark .fi-body {
+    background-color: #0b1220;
+}
+
+.dark .fi-body::before {
+    background:
+        radial-gradient(48rem 32rem at 8% -6%, rgba(47, 95, 224, 0.30), transparent 62%),
+        radial-gradient(40rem 28rem at 96% 2%, rgba(14, 116, 144, 0.30), transparent 64%);
+}
+
+.dark .fi-section,
+.dark .fi-ta-ctn,
+.dark .fi-wi-stats-overview-stat,
+.dark .fi-fo-component-ctn,
+.dark .fi-modal-window,
+.dark .fi-dropdown-panel,
+.dark .fi-simple-main {
+    background: rgba(17, 25, 45, 0.72);
+    -webkit-backdrop-filter: blur(var(--lp-glass-blur)) saturate(150%);
+    backdrop-filter: blur(var(--lp-glass-blur)) saturate(150%);
+    border-color: rgba(255, 255, 255, 0.10);
+    box-shadow: 0 10px 34px rgba(0, 0, 0, 0.40);
+}
+
+.dark .fi-topbar > nav,
+.dark .fi-sidebar-nav {
+    background: rgba(12, 19, 36, 0.78);
+    border-color: rgba(255, 255, 255, 0.09);
+}
+
+.dark .fi-input-wrp {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* ===== Fallback bila backdrop-filter tidak didukung =======================
+   Tanpa blur, permukaan tembus pandang di atas aurora berubah jadi bubur yang
+   tidak terbaca. Di browser tersebut, panel dibuat nyaris solid. */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .fi-section,
+    .fi-ta-ctn,
+    .fi-wi-stats-overview-stat,
+    .fi-fo-component-ctn,
+    .fi-modal-window,
+    .fi-dropdown-panel,
+    .fi-simple-main {
+        background: rgba(255, 255, 255, 0.97);
+    }
+
+    .fi-topbar > nav,
+    .fi-sidebar-nav {
+        background: rgba(247, 250, 255, 0.98);
+    }
+
+    .dark .fi-section,
+    .dark .fi-ta-ctn,
+    .dark .fi-wi-stats-overview-stat,
+    .dark .fi-fo-component-ctn,
+    .dark .fi-modal-window,
+    .dark .fi-dropdown-panel,
+    .dark .fi-simple-main {
+        background: #111a2d;
+    }
+}
+
+/* ===== Preferensi gerak ===== */
+@media (prefers-reduced-motion: reduce) {
+    .fi-wi-stats-overview-stat:hover,
+    .fi-btn.fi-btn-color-primary:hover {
+        transform: none;
+    }
+}

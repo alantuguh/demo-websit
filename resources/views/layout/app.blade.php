@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css">
 
     {{-- Livewire Styles --}}
@@ -20,15 +20,25 @@
         }
 
         :root {
-            --primary-color: rgba(82, 103, 132, 1);
-            --primary-dark: #3f5066;
-            --secondary-color: rgb(176, 99, 13);
-            --accent-color: rgba(195, 208, 227, 1);
-            --surface: #f7f9fb;
-            --ink: #0f151c;
-            --muted: #282d38;
-            --font-heading: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+            /* ===== Brand palette — futuristic glass ===================================
+               Two families do all the work: an electric blue (structure, links, primary
+               actions) and a cyan-teal (accents, highlights). Each has a *text-safe*
+               value used wherever the colour carries words, and a *bright* value used
+               only for fills, glows and gradients where contrast is not a concern.     */
+            --primary-color: #2f5fe0;      /* 5.5:1 on white — safe for body text */
+            --primary-bright: #4f7df3;     /* fills + gradients only */
+            --primary-dark: #1e3fa8;
+            --secondary-color: #0e7490;    /* 5.4:1 on white — safe for body text */
+            --secondary-bright: #22d3ee;   /* glow + gradients only */
+            --violet-bright: #a78bfa;      /* third aurora note, never used for text */
+            --accent-color: #c7d7f5;
+            --surface: #ffffff;
+            --ink: #0b1220;
+            --muted: #46536b;              /* 7.7:1 on white */
+
+            --font-heading: 'Space Grotesk', 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
             --font-body: 'Inter', 'Segoe UI', sans-serif;
+            --font-mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Menlo, monospace;
 
             /* ===== Design tokens: one scale, reused everywhere =====
                Swap a value here and it updates every card, button, badge. */
@@ -37,45 +47,127 @@
             --radius-lg: 1.25rem;
             --radius-pill: 999px;
 
-            --shadow-rest: 0 6px 16px rgba(17, 24, 39, 0.08);
-            --shadow-hover: 0 20px 40px rgba(17, 24, 39, 0.14);
-            --shadow-brand: 0 16px 32px rgba(82, 103, 132, 0.28);
+            /* ===== Glass tokens =======================================================
+               Every frosted surface reads from these four values, so the whole site can
+               be made more or less "glassy" from one place. --glass-edge is the cool rim
+               light that separates a panel from the aurora behind it.                   */
+            --glass-bg: rgba(255, 255, 255, 0.58);
+            --glass-bg-strong: rgba(255, 255, 255, 0.80);
+            --glass-border: rgba(255, 255, 255, 0.70);
+            --glass-edge: rgba(47, 95, 224, 0.16);
+            --glass-blur: 18px;
+
+            --hairline: rgba(20, 40, 90, 0.10);
+
+            --shadow-rest: 0 8px 30px rgba(20, 40, 90, 0.10),
+                           inset 0 1px 0 rgba(255, 255, 255, 0.65);
+            --shadow-hover: 0 22px 50px rgba(20, 40, 90, 0.18),
+                            inset 0 1px 0 rgba(255, 255, 255, 0.85);
+            --shadow-brand: 0 18px 38px rgba(47, 95, 224, 0.32);
+            --glow-cyan: 0 0 0 1px rgba(34, 211, 238, 0.35),
+                         0 12px 34px rgba(34, 211, 238, 0.28);
         }
 
+        /* ===== Base + aurora ======================================================
+           The aurora is a single fixed layer behind everything. It is what the frosted
+           panels actually blur — without it, "glass" would just look like flat white. */
         body {
             font-family: var(--font-body);
             color: var(--ink);
+            background-color: var(--surface);
+        }
+
+        /* Aurora sengaja ditinggalkan sangat tipis: cukup untuk menghindari putih
+           yang benar-benar datar, tapi tetap terbaca sebagai latar putih. Yang
+           memberi kedalaman sekarang adalah kanvas plexus di atas lapisan ini. */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(48rem 32rem at 10% -8%, rgba(79, 125, 243, 0.07), transparent 62%),
+                radial-gradient(40rem 28rem at 94% 4%, rgba(34, 211, 238, 0.06), transparent 64%),
+                radial-gradient(44rem 32rem at 72% 96%, rgba(167, 139, 250, 0.05), transparent 62%),
+                var(--surface);
+        }
+
+        /* ===== Kanvas plexus =====================================================
+           Satu kanvas tetap untuk seluruh halaman (bukan satu per section), di
+           atas aurora tapi di bawah semua konten. Titik dan garisnya digambar
+           oleh skrip di dekat penutup halaman. */
+        .plexus-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            display: block;
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .plexus-bg {
+                /* Skrip menggambar satu frame diam; kanvasnya tetap tampil. */
+                opacity: 0.85;
+            }
         }
 
         h1, h2, h3, h4, h5, h6,
         .navbar-brand, .btn, .fw-bold {
             font-family: var(--font-heading);
-            letter-spacing: -0.01em;
+            letter-spacing: -0.015em;
         }
 
-        /* Bold gradient accent for key highlighted words (uses existing brand colors only) */
+        /* Bold gradient accent for key highlighted words */
         .text-gradient {
-            background: linear-gradient(100deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: linear-gradient(100deg, var(--primary-color) 0%, var(--secondary-bright) 60%, var(--violet-bright) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
+        /* ===== Reusable frosted-panel recipe =====
+           .glass-panel is the single source of truth; components extend it. */
+        .glass-panel {
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+            backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-rest), 0 0 0 1px var(--glass-edge);
+            border-radius: var(--radius-lg);
+        }
+
         /* ===== Navbar ===== */
         .navbar {
-            background-color: rgba(255, 255, 255, 0.92);
-            backdrop-filter: saturate(180%) blur(8px);
-            box-shadow: 0 1px 0 rgba(17, 24, 39, 0.06);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(233, 240, 255, 0.58));
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 1px 0 var(--glass-edge), 0 10px 30px rgba(20, 40, 90, 0.06);
             padding-top: 0.85rem;
             padding-bottom: 0.85rem;
-            transition: padding 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            transition: padding 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        /* Scanline of light along the bottom edge — the one overt "sci-fi" flourish */
+        .navbar::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -1px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--secondary-bright), var(--primary-bright), transparent);
+            opacity: 0.55;
         }
 
         .navbar.navbar-scrolled {
             padding-top: 0.55rem;
             padding-bottom: 0.55rem;
-            background-color: rgba(255, 255, 255, 0.97);
-            box-shadow: 0 12px 28px rgba(17, 24, 39, 0.09);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(233, 240, 255, 0.74));
+            box-shadow: 0 1px 0 var(--glass-edge), 0 16px 34px rgba(20, 40, 90, 0.10);
         }
 
         .navbar-brand {
@@ -88,7 +180,7 @@
             transform: translateY(-1px);
         }
 
-        /* Nav links: text + animated highlight bar on hover/focus (no background pill, no blur) */
+        /* Nav links: text + animated highlight bar on hover/focus */
         .navbar-nav .nav-link {
             position: relative;
             color: var(--ink) !important;
@@ -107,7 +199,8 @@
             width: 0;
             height: 3px;
             border-radius: 3px;
-            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            background: linear-gradient(90deg, var(--secondary-bright), var(--primary-bright));
+            box-shadow: 0 0 12px rgba(34, 211, 238, 0.7);
             transform: translateX(-50%);
             transition: width 0.35s cubic-bezier(0.65, 0, 0.35, 1);
         }
@@ -126,6 +219,17 @@
         .navbar-nav .dropdown:hover > .nav-link::before,
         .navbar-nav .dropdown.show > .nav-link::before {
             width: 55%;
+        }
+
+        /* ===== Dropdown ===== */
+        .dropdown-menu {
+            background: var(--glass-bg-strong);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(170%);
+            backdrop-filter: blur(var(--glass-blur)) saturate(170%);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            box-shadow: 0 18px 44px rgba(20, 40, 90, 0.16), 0 0 0 1px var(--glass-edge);
+            padding: 0.5rem;
         }
 
         /* Fancy fade/scale dropdown transition — desktop only (matches navbar-expand-lg's
@@ -172,6 +276,8 @@
                 border: none;
                 box-shadow: none;
                 background: transparent !important;
+                -webkit-backdrop-filter: none;
+                backdrop-filter: none;
                 padding-left: 0.75rem;
             }
 
@@ -194,14 +300,14 @@
         }
 
         .dropdown-item:hover {
-            background: var(--surface);
+            background: rgba(79, 125, 243, 0.12);
             color: var(--primary-color);
             transition: background 0.5s ease, color 0.5s ease;
         }
 
-        .dropdown-item.active, 
+        .dropdown-item.active,
         .dropdown-item:active {
-            background-color: var(--primary-color);
+            background: linear-gradient(100deg, var(--primary-color), var(--primary-bright));
             color: #ffffff !important;
         }
 
@@ -211,13 +317,13 @@
         }
 
         .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
+            background: linear-gradient(100deg, var(--primary-color), var(--primary-bright));
+            border-color: transparent;
         }
 
         .btn-primary:hover {
-            background-color: var(--primary-dark);
-            border-color: var(--primary-dark);
+            background: linear-gradient(100deg, var(--primary-dark), var(--primary-color));
+            border-color: transparent;
         }
 
         .btn-outline-primary {
@@ -231,19 +337,38 @@
         }
 
         .btn-brand {
-            background: var(--primary-color);
+            position: relative;
+            background: linear-gradient(100deg, var(--primary-color) 0%, var(--primary-bright) 55%, var(--secondary-bright) 130%);
             color: #fff;
             border: none;
             border-radius: var(--radius-pill);
             padding: 0.75rem 1.75rem;
-            transition: all 0.25s ease;
+            box-shadow: 0 10px 24px rgba(47, 95, 224, 0.28);
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        /* Sheen that sweeps across on hover */
+        .btn-brand::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -60%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+            transform: skewX(-18deg);
+            transition: left 0.55s ease;
         }
 
         .btn-brand:hover {
-            background: var(--primary-dark);
             color: #fff;
             transform: translateY(-3px);
-            box-shadow: var(--shadow-brand);
+            box-shadow: var(--shadow-brand), var(--glow-cyan);
+        }
+
+        .btn-brand:hover::after {
+            left: 120%;
         }
 
         .btn-brand:active {
@@ -251,17 +376,21 @@
         }
 
         .btn-outline-brand {
-            border: 2px solid var(--primary-color);
+            border: 1px solid var(--glass-border);
             color: var(--primary-color);
             border-radius: var(--radius-pill);
             padding: 0.7rem 1.7rem;
-            background: transparent;
-            transition: all 0.25s ease;
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            backdrop-filter: blur(12px) saturate(160%);
+            box-shadow: 0 0 0 1px var(--glass-edge), 0 6px 18px rgba(20, 40, 90, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
         }
 
         .btn-outline-brand:hover {
-            background: var(--primary-color);
+            background: linear-gradient(100deg, var(--primary-color), var(--primary-bright));
             color: #fff;
+            border-color: transparent;
             transform: translateY(-3px);
             box-shadow: var(--shadow-brand);
         }
@@ -273,12 +402,24 @@
         /* ===== Section helpers ===== */
         .eyebrow {
             display: inline-block;
+            font-family: var(--font-mono);
             text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            font-size: 0.74rem;
             font-weight: 700;
             color: var(--secondary-color);
             margin-bottom: 0.75rem;
+        }
+
+        /* Small leading tick, like a readout label */
+        .eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 1.6rem;
+            height: 2px;
+            margin-right: 0.6rem;
+            vertical-align: middle;
+            background: linear-gradient(90deg, var(--secondary-bright), var(--primary-bright));
         }
 
         .section-title {
@@ -298,7 +439,12 @@
         }
 
         .bg-surface {
-            background: var(--surface);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(239, 243, 252, 0.30));
+        }
+
+        /* Bootstrap's bg-light is opaque white by default and would block the aurora */
+        .bg-light {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(239, 243, 252, 0.38)) !important;
         }
 
         /* ===== Layout utility (replaces repeated inline padding-top/bottom) ===== */
@@ -307,7 +453,176 @@
             padding-bottom: 6rem;
         }
 
-        /* ===== Badge utilities (replaces repeated inline badge colors) ===== */
+        /* ===== Page hero band =====================================================
+           Replaces the gradient+photo inline style that was copy-pasted into eight
+           different page templates. Edit the band once, here. */
+        .page-hero {
+            position: relative;
+            overflow: hidden;
+            padding: 110px 0 90px;
+            background:
+                linear-gradient(180deg, rgba(20, 40, 90, 0.34) 0%, rgba(47, 95, 224, 0.40) 55%, rgba(14, 116, 144, 0.48) 100%),
+                var(--hero-photo, none),
+                linear-gradient(160deg, #1b2a6b, #0e7490);
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        /* Aurora bloom + faint tech grid layered over the photo */
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(30rem 20rem at 8% 12%, rgba(34, 211, 238, 0.38), transparent 60%),
+                radial-gradient(28rem 20rem at 90% 82%, rgba(167, 139, 250, 0.34), transparent 62%),
+                repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 64px),
+                repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 64px);
+        }
+
+        .page-hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== Lapisan video latar hero (lihat partials/hero-video) ===========
+           Selector sengaja dibuat lebih spesifik daripada `.page-hero > *` di
+           atas — aturan itu menaikkan SEMUA anak langsung ke z-index 1, dan
+           tanpa penimpaan ini video akan menutupi teks hero. */
+        .page-hero .page-hero-media {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .page-hero-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            /* Landing tidak lagi memakai foto lab, jadi video ini satu-satunya
+               citra di hero — opasitasnya dinaikkan sedikit dari 0.35 agar tetap
+               terbaca di atas gradien, tapi masih samar di belakang teks.
+               Kalau perlu disetel, cukup ubah satu angka ini. */
+            opacity: 0.45;
+            filter: saturate(0.85);
+        }
+
+        /* Peredup di atas video supaya kontras teks hero tidak turun */
+        .page-hero-media::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                rgba(11, 20, 48, 0.30) 0%,
+                rgba(20, 40, 110, 0.22) 55%,
+                rgba(14, 116, 144, 0.28) 100%);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-hero-media {
+                display: none;
+            }
+        }
+
+        .page-hero .section-title,
+        .page-hero h1,
+        .page-hero h2 {
+            color: #fff;
+            text-shadow: 0 2px 18px rgba(6, 16, 42, 0.45);
+        }
+
+        .page-hero .section-subtitle,
+        .page-hero p {
+            color: rgba(255, 255, 255, 0.90);
+        }
+
+        .page-hero .eyebrow {
+            color: #a5f3fc;
+        }
+
+        .page-hero .eyebrow::before {
+            background: linear-gradient(90deg, #a5f3fc, rgba(255, 255, 255, 0.6));
+        }
+
+        .page-hero .badge-soft {
+            background: rgba(255, 255, 255, 0.18);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+        }
+
+        .page-hero .btn-outline-brand {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.55);
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .page-hero .btn-outline-brand:hover {
+            color: var(--primary-dark);
+            background: #fff;
+        }
+
+        /* On the dark band the blue half of the gradient disappears, so the highlight
+           runs cyan -> white instead. */
+        .page-hero .text-gradient {
+            background: linear-gradient(100deg, #a5f3fc 0%, #ffffff 55%, #c4b5fd 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        /* ===== Deep band =========================================================
+           A dark aurora section used to break up the light page and anchor it —
+           same family as the hero, reusable on any section via .band-deep. */
+        .band-deep {
+            position: relative;
+            overflow: hidden;
+            color: rgba(255, 255, 255, 0.92);
+            background:
+                radial-gradient(38rem 22rem at 14% 8%, rgba(47, 95, 224, 0.55), transparent 62%),
+                radial-gradient(32rem 20rem at 86% 90%, rgba(14, 116, 144, 0.55), transparent 62%),
+                #0b1430;
+        }
+
+        .band-deep::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 58px),
+                repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 58px);
+        }
+
+        .band-deep h1,
+        .band-deep h2,
+        .band-deep h3,
+        .band-deep h4,
+        .band-deep h5 {
+            color: #fff;
+        }
+
+        .band-deep p {
+            color: rgba(255, 255, 255, 0.82);
+        }
+
+        .band-deep .eyebrow {
+            color: #a5f3fc;
+        }
+
+        .band-deep .eyebrow::before {
+            background: linear-gradient(90deg, #a5f3fc, rgba(255, 255, 255, 0.55));
+        }
+
+        .band-deep .partner-avatar {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        /* ===== Badge utilities ===== */
         .badge-brand,
         .badge-accent {
             font-size: 0.75em;
@@ -317,29 +632,32 @@
         }
 
         .badge-brand {
-            background: var(--primary-color);
+            background: linear-gradient(100deg, var(--primary-color), var(--primary-bright));
             color: #fff;
         }
 
         .badge-accent {
-            background: var(--secondary-color);
+            background: linear-gradient(100deg, var(--secondary-color), var(--secondary-bright));
             color: #fff;
         }
 
         .badge-soft {
-            background: rgba(82, 103, 132, 0.1);
+            background: rgba(79, 125, 243, 0.12);
             color: var(--primary-color);
+            border: 1px solid rgba(79, 125, 243, 0.22);
             border-radius: var(--radius-pill);
             padding: 0.45em 0.9em;
             font-weight: 700;
             font-size: 0.78em;
         }
 
-        /* ===== Cards ===== */
+        /* ===== Cards — the main frosted surface ===== */
         .card-flat {
-            background: #fff;
-            border: 1px solid var(--primary-color);
-            box-shadow: var(--shadow-rest);
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+            backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-rest), 0 0 0 1px var(--glass-edge);
             border-radius: var(--radius-lg);
             transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
             position: relative;
@@ -353,17 +671,18 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary-bright), var(--primary-bright), var(--violet-bright));
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.35s ease;
+            z-index: 2;
         }
 
         .card-flat:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-brand);
-            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-hover), 0 0 0 1px rgba(34, 211, 238, 0.35);
+            border-color: rgba(255, 255, 255, 0.9);
         }
 
         .card-flat:hover::before {
@@ -377,21 +696,26 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: rgba(82, 103, 132, 0.1);
+            background: linear-gradient(145deg, rgba(79, 125, 243, 0.16), rgba(34, 211, 238, 0.16));
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 6px 16px rgba(20, 40, 90, 0.10);
             color: var(--primary-color);
             font-size: 1.3rem;
         }
 
-        /* ===== List rows (e.g. Mata Kuliah) — drop shadow + bold accent line ===== */
+        /* ===== List rows (e.g. Mata Kuliah) ===== */
         .list-row {
             display: flex;
             align-items: center;
-            background: #fff;
-            border-left: 4px solid var(--primary-color);
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(12px) saturate(150%);
+            backdrop-filter: blur(12px) saturate(150%);
+            border: 1px solid var(--glass-border);
+            border-left: 3px solid var(--primary-bright);
             border-radius: var(--radius-sm);
             padding: 0.55rem 0.9rem;
             margin-bottom: 0.55rem;
-            box-shadow: var(--shadow-rest);
+            box-shadow: 0 6px 18px rgba(20, 40, 90, 0.08);
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
@@ -401,22 +725,23 @@
 
         .list-row:hover {
             transform: translateX(5px);
-            box-shadow: var(--shadow-hover);
+            border-left-color: var(--secondary-bright);
+            box-shadow: 0 14px 30px rgba(20, 40, 90, 0.14);
         }
 
         .list-row-accent {
-            border-left-color: var(--secondary-color);
+            border-left-color: var(--secondary-bright);
         }
 
-        /* ===== Image accents — drop shadow + bold accent border/line ===== */
+        /* ===== Image accents ===== */
         .img-hero-accent {
-            box-shadow: 0 20px 45px rgba(17, 24, 39, 0.18);
-            border: 4px solid var(--accent-color);
+            box-shadow: 0 24px 55px rgba(20, 40, 90, 0.28), 0 0 0 1px rgba(34, 211, 238, 0.30);
+            border: 4px solid rgba(255, 255, 255, 0.75);
         }
 
         .img-thumb-accent {
-            box-shadow: 0 10px 24px rgba(17, 24, 39, 0.14);
-            border-bottom: 4px solid var(--secondary-color);
+            box-shadow: 0 10px 24px rgba(20, 40, 90, 0.16);
+            border-bottom: 3px solid var(--secondary-bright);
             transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
@@ -424,7 +749,7 @@
             transform: scale(1.06);
         }
 
-        /* ===== Person card (Asisten Laboratorium) — avatar-first, no table ===== */
+        /* ===== Person card (Asisten Laboratorium) ===== */
         .person-card {
             display: flex;
             flex-direction: column;
@@ -442,8 +767,8 @@
             justify-content: center;
             font-size: 1.7rem;
             color: #fff;
-            background: linear-gradient(145deg, var(--primary-color), var(--primary-dark));
-            box-shadow: var(--shadow-rest);
+            background: linear-gradient(145deg, var(--primary-bright), var(--primary-dark) 70%, var(--secondary-color));
+            box-shadow: 0 10px 24px rgba(47, 95, 224, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.45);
             margin-bottom: 0.6rem;
         }
 
@@ -473,8 +798,6 @@
         }
 
         /* ===== 3D Hero Illustration (gradient icon cluster w/ float + gloss) ===== */
-   
-
         .hero3d-stage {
             position: relative;
             width: 100%;
@@ -488,23 +811,24 @@
             border-radius: 50%;
             z-index: 0;
             pointer-events: none;
+            filter: blur(6px);
         }
 
-        .hero3d-orb.o1 { width: 230px; height: 230px; top: -8%; left: -12%; background: var(--accent-color); opacity: 0.55; }
-        .hero3d-orb.o2 { width: 110px; height: 110px; bottom: -4%; right: -4%; background: var(--secondary-color); opacity: 0.16; }
+        .hero3d-orb.o1 { width: 230px; height: 230px; top: -8%; left: -12%; background: radial-gradient(circle, rgba(34, 211, 238, 0.75), transparent 70%); opacity: 0.8; }
+        .hero3d-orb.o2 { width: 110px; height: 110px; bottom: -4%; right: -4%; background: radial-gradient(circle, rgba(167, 139, 250, 0.75), transparent 70%); opacity: 0.7; }
 
         .hero3d-badge {
             position: absolute;
             top: 2%;
             right: 0;
             z-index: 5;
-            background: var(--secondary-color);
+            background: linear-gradient(100deg, var(--secondary-color), var(--secondary-bright));
             color: #fff;
             font-weight: 700;
             font-size: 0.85rem;
             padding: 0.5em 1.15em;
             border-radius: 50px;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 12px 28px rgba(14, 116, 144, 0.45);
         }
 
         .hero3d-tile {
@@ -514,7 +838,7 @@
             justify-content: center;
             border-radius: 30%;
             box-shadow:
-                0 22px 40px -8px rgba(17, 24, 39, 0.35),
+                0 22px 40px -8px rgba(20, 40, 90, 0.38),
                 inset 0 2px 3px rgba(255, 255, 255, 0.45),
                 inset 0 -10px 16px rgba(0, 0, 0, 0.15);
             z-index: 2;
@@ -541,11 +865,11 @@
             z-index: 1;
         }
 
-        .hero3d-tile.g-primary { background: radial-gradient(circle at 32% 26%, #8ea0bc 0%, var(--primary-color) 55%, var(--primary-dark) 100%); }
-        .hero3d-tile.g-secondary { background: radial-gradient(circle at 32% 26%, #e6a751 0%, var(--secondary-color) 58%, #7c4909 100%); }
-        .hero3d-tile.g-accent { background: radial-gradient(circle at 32% 26%, #eef2f8 0%, var(--accent-color) 60%, #9fb2ce 100%); }
+        .hero3d-tile.g-primary { background: radial-gradient(circle at 32% 26%, #8fb0ff 0%, var(--primary-bright) 55%, var(--primary-dark) 100%); }
+        .hero3d-tile.g-secondary { background: radial-gradient(circle at 32% 26%, #7ee9fb 0%, var(--secondary-bright) 55%, var(--secondary-color) 100%); }
+        .hero3d-tile.g-accent { background: radial-gradient(circle at 32% 26%, #f2f6ff 0%, var(--accent-color) 60%, #9fb2ce 100%); }
         .hero3d-tile.g-accent i { color: var(--primary-color); filter: drop-shadow(0 2px 2px rgba(255, 255, 255, 0.5)); }
-        .hero3d-tile.g-light { background: radial-gradient(circle at 32% 26%, #ffffff 0%, #eef2f7 55%, var(--accent-color) 100%); }
+        .hero3d-tile.g-light { background: radial-gradient(circle at 32% 26%, #ffffff 0%, #eef4ff 55%, var(--accent-color) 100%); }
         .hero3d-tile.g-light i { color: var(--secondary-color); filter: none; }
 
         .hero3d-tile.tile-main { width: 48%; height: 48%; left: 26%; top: 24%; font-size: 2.6rem; z-index: 3; animation: hero3d-float-1 6.5s ease-in-out infinite; }
@@ -589,18 +913,8 @@
             to { transform: rotate(360deg); }
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            .hero3d-tile.tile-main .hero3d-gear-ring {
-                animation: none;
-            }
-        }
-
         @media (max-width: 991.98px) {
             .hero3d-stage { max-width: 300px; margin-top: 1.5rem; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .hero3d-tile { animation: none; }
         }
 
         /* ===== Stats ===== */
@@ -608,16 +922,20 @@
             font-family: var(--font-heading);
             font-size: 2.4rem;
             font-weight: 800;
-            color: var(--primary-color);
             line-height: 1;
             font-variant-numeric: tabular-nums;
+            background: linear-gradient(100deg, var(--primary-color), var(--secondary-bright));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .stat-label {
-            font-size: 0.82rem;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
             color: var(--muted);
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.12em;
             margin-top: 0.4rem;
         }
 
@@ -652,9 +970,9 @@
             height: 88px;
             border-radius: 50%;
             overflow: hidden;
-            background: #fff;
-            border: 3px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 22px rgba(20, 40, 90, 0.18);
             filter: grayscale(65%);
             opacity: 0.85;
             transition: all 0.25s ease;
@@ -671,11 +989,274 @@
             filter: grayscale(0%);
             opacity: 1;
             transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(20, 40, 90, 0.22), var(--glow-cyan);
+        }
+
+        /* ===== Produk unggulan — kartu video berjalan ============================
+           Jalur bergerak dari KIRI ke KANAN: keyframe berangkat dari -50% menuju 0.
+           Daftar kartu dirender dua kali, sehingga pada saat translate mencapai 0
+           salinan kedua persis menempati posisi awal — putarannya tidak terlihat
+           menyambung. */
+        .product-marquee {
+            overflow: hidden;
+            width: 100%;
+            padding: 0.75rem 0 1.25rem;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+        }
+
+        .product-track {
+            display: flex;
+            align-items: stretch;
+            gap: 1.5rem;
+            width: max-content;
+            animation: product-scroll 70s linear infinite;
+        }
+
+        @keyframes product-scroll {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0); }
+        }
+
+        /* Berhenti saat disentuh tetikus atau saat ada elemen di dalamnya yang
+           menerima fokus keyboard — tanpa ini, tautan mustahil diklik. */
+        .product-marquee:hover .product-track,
+        .product-marquee:focus-within .product-track {
+            animation-play-state: paused;
+        }
+
+        .product-card {
+            flex: 0 0 auto;
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+            backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-rest), 0 0 0 1px var(--glass-edge);
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover), 0 0 0 1px rgba(34, 211, 238, 0.35);
+        }
+
+        .product-media {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: linear-gradient(140deg, var(--primary-dark), var(--secondary-color));
+        }
+
+        .product-media video,
+        .product-media > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Kartu tanpa video: logo atau ikon di atas gradien aurora */
+        .product-media-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background:
+                radial-gradient(18rem 12rem at 22% 18%, rgba(34, 211, 238, 0.40), transparent 62%),
+                radial-gradient(16rem 11rem at 82% 84%, rgba(167, 139, 250, 0.36), transparent 62%);
+        }
+
+        .product-media-empty img {
+            width: auto;
+            max-width: 62%;
+            height: 56%;
+            object-fit: contain;
+            filter: drop-shadow(0 6px 14px rgba(6, 16, 42, 0.45));
+        }
+
+        .product-media-empty i {
+            font-size: 2.6rem;
+            color: rgba(255, 255, 255, 0.92);
+            filter: drop-shadow(0 4px 10px rgba(6, 16, 42, 0.45));
+        }
+
+        .product-flag {
+            position: absolute;
+            top: 0.7rem;
+            left: 0.7rem;
+            z-index: 2;
+            font-family: var(--font-mono);
+            font-size: 0.64rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 0.4em 0.8em;
+            border-radius: var(--radius-pill);
+            background: linear-gradient(100deg, var(--secondary-color), var(--secondary-bright));
+            color: #fff;
+            box-shadow: 0 6px 16px rgba(14, 116, 144, 0.45);
+        }
+
+        .product-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex: 1;
+            padding: 1rem 1.15rem 1.25rem;
+        }
+
+        .product-title {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.05rem;
+            line-height: 1.3;
+            margin: 0;
+            color: var(--ink);
+        }
+
+        .product-desc {
+            margin: 0;
+            flex: 1;
+            font-size: 0.88rem;
+            line-height: 1.55;
+            color: var(--muted);
+        }
+
+        .product-desc-empty {
+            font-style: italic;
+            opacity: 0.7;
+        }
+
+        .product-link {
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .product-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .product-link i {
+            transition: transform 0.2s ease;
+        }
+
+        .product-link:hover i {
+            transform: translateX(3px);
+        }
+
+        @media (max-width: 575.98px) {
+            .product-card { width: 270px; }
+        }
+
+        /* ===== Modul VR — badge status & tautan ruang =========================
+           Dipakai oleh partials/vr-module-card yang muncul di halaman katalog
+           maupun halaman ruang, jadi didefinisikan sekali di sini. */
+        .vr-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--font-mono);
+            font-size: 0.66rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.4em 0.75em;
+            border-radius: var(--radius-pill);
+            border: 1px solid transparent;
+        }
+
+        .vr-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .vr-status-tersedia {
+            background: rgba(16, 132, 91, 0.12);
+            border-color: rgba(16, 132, 91, 0.28);
+            color: #10845b;
+        }
+
+        .vr-status-pengembangan {
+            background: rgba(180, 105, 8, 0.12);
+            border-color: rgba(180, 105, 8, 0.28);
+            color: #b46908;
+        }
+
+        .vr-status-rencana {
+            background: rgba(70, 83, 107, 0.12);
+            border-color: rgba(70, 83, 107, 0.26);
+            color: var(--muted);
+        }
+
+        .vr-module-room {
+            display: inline-flex;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+        }
+
+        .vr-module-room:hover {
+            color: var(--primary-color);
+        }
+
+        /* ===== Segmen unggulan VR di landing ===== */
+        .vr-highlight-visual {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.85rem;
+        }
+
+        .vr-highlight-room {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: transform 0.25s ease, background 0.25s ease;
+        }
+
+        .vr-highlight-room:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .vr-highlight-room i {
+            font-size: 1.15rem;
+            color: #a5f3fc;
+        }
+
+        .vr-highlight-room span {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.92);
+            line-height: 1.35;
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .logo-track {
-                animation: none;
+            .vr-highlight-room:hover {
+                transform: none;
             }
         }
 
@@ -687,13 +1268,13 @@
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: var(--secondary-color);
+            background: linear-gradient(140deg, var(--primary-bright), var(--secondary-bright));
             color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.35rem;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 12px 28px rgba(14, 116, 144, 0.40);
             z-index: 1050;
             transition: transform 0.25s ease, color 0.25s ease;
             animation: pulse-ring 2.6s ease-in-out infinite;
@@ -707,18 +1288,35 @@
 
         @keyframes pulse-ring {
             0%, 100% {
-                box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25), 0 0 0 0 rgba(176, 99, 13, 0.45);
+                box-shadow: 0 12px 28px rgba(14, 116, 144, 0.40), 0 0 0 0 rgba(34, 211, 238, 0.55);
             }
             50% {
-                box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25), 0 0 0 12px rgba(176, 99, 13, 0);
+                box-shadow: 0 12px 28px rgba(14, 116, 144, 0.40), 0 0 0 14px rgba(34, 211, 238, 0);
             }
         }
 
-        /* ===== Footer ===== */
+        /* ===== Footer — dark glass ===== */
         footer {
-            background: #16202b;
+            position: relative;
+            background:
+                radial-gradient(40rem 20rem at 12% 0%, rgba(47, 95, 224, 0.45), transparent 62%),
+                radial-gradient(34rem 18rem at 88% 12%, rgba(14, 116, 144, 0.45), transparent 62%),
+                #070c1a;
             color: rgba(255, 255, 255, 0.85);
             padding: 64px 0 28px;
+            overflow: hidden;
+        }
+
+        /* Light beam along the top edge, mirroring the navbar scanline */
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--secondary-bright), var(--primary-bright), transparent);
+            opacity: 0.7;
         }
 
         footer h5 {
@@ -739,7 +1337,7 @@
             bottom: 0;
             width: 42px;
             height: 2px;
-            background-color: var(--secondary-color);
+            background: linear-gradient(90deg, var(--secondary-bright), var(--primary-bright));
         }
 
         .footer-links a {
@@ -751,7 +1349,7 @@
         }
 
         .footer-links a:hover {
-            color: white;
+            color: #a5f3fc;
             padding-left: 6px;
         }
 
@@ -767,6 +1365,7 @@
             width: 36px;
             height: 36px;
             background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
             border-radius: 50%;
             color: white;
             margin-right: 10px;
@@ -774,12 +1373,13 @@
         }
 
         .social-links a:hover {
-            background: var(--secondary-color);
+            background: linear-gradient(140deg, var(--primary-bright), var(--secondary-bright));
+            border-color: transparent;
             transform: translateY(-3px);
         }
 
         footer hr {
-            border-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.12);
             margin: 30px 0 20px;
         }
 
@@ -787,15 +1387,18 @@
             color: rgba(255, 255, 255, 0.55);
             font-size: 0.88rem;
         }
-        
+
+        /* ===== Latar section ======================================================
+           Dulu berisi pola ikon ergonomi + grid sebagai gambar latar. Sekarang
+           teksturnya datang dari kanvas plexus site-wide di belakang seluruh
+           halaman, jadi section-nya cukup dibuat tembus pandang — itulah yang
+           membuat kartu kaca punya sesuatu untuk di-blur. Class-nya sengaja
+           dipertahankan karena dipakai di 18 tempat. */
         .bg-particles {
-            background-color: rgba(195, 208, 227, 0.25);
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 260' width='260' height='260'%3E%3Cdefs%3E%3Cg id='goniometer' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M-18,10 A20,20 0 0 1 18,10'/%3E%3Cline x1='-18' y1='10' x2='18' y2='10'/%3E%3Cline x1='0' y1='10' x2='13' y2='-10'/%3E%3Ccircle cx='0' cy='10' r='2'/%3E%3Cline x1='-18' y1='10' x2='-16' y2='4.5' stroke-width='1.4'/%3E%3Cline x1='0' y1='-1.3' x2='0' y2='-7' stroke-width='1.4'/%3E%3Cline x1='18' y1='10' x2='16' y2='4.5' stroke-width='1.4'/%3E%3C/g%3E%3Cg id='stopwatch' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='0' cy='2' r='15'/%3E%3Cline x1='0' y1='2' x2='0' y2='-8'/%3E%3Cline x1='0' y1='2' x2='7' y2='6'/%3E%3Cline x1='-4' y1='-16' x2='4' y2='-16'/%3E%3Cline x1='0' y1='-16' x2='0' y2='-13'/%3E%3Cline x1='10' y1='-12' x2='13' y2='-15'/%3E%3C/g%3E%3Cg id='ruler' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='-22' y='-6' width='44' height='12' rx='2'/%3E%3Cline x1='-14' y1='-6' x2='-14' y2='0' stroke-width='1.4'/%3E%3Cline x1='-6' y1='-6' x2='-6' y2='2' stroke-width='1.4'/%3E%3Cline x1='2' y1='-6' x2='2' y2='0' stroke-width='1.4'/%3E%3Cline x1='10' y1='-6' x2='10' y2='2' stroke-width='1.4'/%3E%3Cline x1='18' y1='-6' x2='18' y2='0' stroke-width='1.4'/%3E%3C/g%3E%3Cg id='chair' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M-8,-18 L-8,-2 M-8,-18 Q-8,-22 -4,-22 L4,-22'/%3E%3Crect x='-10' y='-2' width='20' height='4' rx='1'/%3E%3Cline x1='0' y1='2' x2='0' y2='14'/%3E%3Cline x1='-8' y1='18' x2='8' y2='18'/%3E%3Cline x1='0' y1='14' x2='-8' y2='18'/%3E%3Cline x1='0' y1='14' x2='8' y2='18'/%3E%3C/g%3E%3Cg id='clipboard' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='-14' y='-18' width='28' height='36' rx='2'/%3E%3Crect x='-6' y='-21' width='12' height='6' rx='1'/%3E%3Cline x1='-9' y1='-6' x2='9' y2='-6' stroke-width='1.4'/%3E%3Cline x1='-9' y1='2' x2='9' y2='2' stroke-width='1.4'/%3E%3Cline x1='-9' y1='10' x2='3' y2='10' stroke-width='1.4'/%3E%3C/g%3E%3C/defs%3E%3Cuse href='%23goniometer' stroke='rgba(176,99,13,0.42)' transform='translate(55,55) rotate(-8) scale(0.95)'/%3E%3Cuse href='%23stopwatch' stroke='rgba(82,103,132,0.42)' transform='translate(197,58) rotate(6) scale(0.85)'/%3E%3Cuse href='%23ruler' stroke='rgba(82,103,132,0.42)' transform='translate(58,197) rotate(12) scale(0.8)'/%3E%3Cuse href='%23chair' stroke='rgba(176,99,13,0.42)' transform='translate(200,197) rotate(-6) scale(0.9)'/%3E%3Cuse href='%23clipboard' stroke='rgba(82,103,132,0.38)' transform='translate(128,128) rotate(4) scale(0.62)'/%3E%3C/svg%3E");
-            background-repeat: repeat;
-            background-size: 260px 260px;
-            background-position: 0 0;
+            background: transparent;
             position: relative;
         }
+
         .wave-divider-bottom {
             position: absolute;
             bottom: 0;
@@ -803,13 +1406,14 @@
             width: 100%;
             overflow: hidden;
             line-height: 0;
-            transform: translateY(1px); 
+            transform: translateY(1px);
+            z-index: 1;
         }
 
         .wave-divider-bottom svg {
             display: block;
             width: calc(100% + 1.3px);
-            height: 30px; 
+            height: 30px;
         }
 
         @media (min-width: 992px) {
@@ -817,11 +1421,87 @@
                 height: 45px;
             }
         }
+
+        /* ===== Graceful degradation ================================================
+           Firefox with backdrop-filter disabled, and older Safari/Android, render a
+           translucent panel with no blur — which over the aurora turns into unreadable
+           mush. Where the filter is unsupported, fall back to near-solid surfaces. */
+        @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+            .navbar,
+            .navbar.navbar-scrolled {
+                background: rgba(247, 250, 255, 0.98);
+            }
+
+            .card-flat,
+            .list-row,
+            .btn-outline-brand,
+            .dropdown-menu,
+            .product-card,
+            .glass-panel {
+                background: rgba(255, 255, 255, 0.96);
+            }
+        }
+
+        /* ===== Motion preferences ==================================================
+           Everything decorative stops; nothing that conveys information is animated. */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .hero3d-tile,
+            .hero3d-tile.tile-main .hero3d-gear-ring,
+            .logo-track,
+            .product-track,
+            .floating-contact {
+                animation: none;
+            }
+
+            .btn-brand::after {
+                transition: none;
+            }
+
+            .card-flat:hover,
+            .btn-brand:hover,
+            .btn-outline-brand:hover,
+            .list-row:hover,
+            .product-card:hover,
+            .partner-avatar:hover {
+                transform: none;
+            }
+
+            /* Tanpa gerakan, marquee berubah jadi grid biasa — salinan kedua
+               (yang hanya ada demi kemulusan putaran) disembunyikan. */
+            .product-marquee {
+                -webkit-mask-image: none;
+                mask-image: none;
+                padding-inline: 1rem;
+            }
+
+            .product-track {
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+            }
+
+            .product-card[data-clone="true"] {
+                display: none;
+            }
+        }
     </style>
+
+    {{-- Style khusus per halaman. Tanpa stack ini, setiap @push('styles') di view
+         akan dibuang diam-diam — itulah sebabnya style tab di halaman Asisten,
+         Kolaborator, dan detail Prestasi sebelumnya tidak pernah tampil.
+         Diletakkan setelah <style> di atas supaya halaman bisa menimpa token. --}}
+    @stack('styles')
 </head>
 <body>
+    {{-- Latar plexus: jaring titik-garis animasi di belakang seluruh halaman --}}
+    <canvas class="plexus-bg" aria-hidden="true"></canvas>
+
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background: linear-gradient(180deg, rgba(195, 208, 227, 0.75) 25%, #aebfda 100%);">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <img src="{{ asset('images/logo_lpske.png') }}" alt="LPSKE Logo" height="40" class="d-inline-block align-text-top">
@@ -838,7 +1518,7 @@
                         <a class="nav-link dropdown-toggle {{ request()->routeIs('asisten-laboratorium*', 'kepala-laboratorium*', 'dosen-laboratorium*') ? 'active' : ''}}" href="#" id="asistenDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Tim Laboratorium
                         </a>
-                        <ul class="dropdown-menu" style="background: linear-gradient(180deg, rgba(195, 208, 227, 0.9) 75%, #d9dde4 100%)"aria-labelledby="asistenDropdown">
+                        <ul class="dropdown-menu" aria-labelledby="asistenDropdown">
                             <li><a class="dropdown-item {{ request()->routeIs('asisten-laboratorium') && !request('angkatan') ? 'active' : '' }}" href="{{ route('asisten-laboratorium') }}">Semua Asisten</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item {{ request('angkatan') == 2020 ? 'active' : '' }}" href="{{ route('asisten-laboratorium', ['angkatan' => 2020]) }}">Angkatan 2020</a></li>
@@ -854,6 +1534,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('katalog-karya.index') ? 'active' : '' }}" href="{{ route('katalog-karya.index') }}">Katalog Karya</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('vr-ergonomy.*') ? 'active' : '' }}" href="{{ route('vr-ergonomy.index') }}">VR Ergonomy</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('proyek-laboratorium.index') ? 'active' : '' }}" href="{{ route('proyek-laboratorium.index') }}">Proyek Laboratorium</a>
@@ -885,6 +1568,7 @@
                         <a href="#">Beranda</a>
                         <a href="#about">Tentang Kami</a>
                         <a href="#facilities">Fasilitas & SOP</a>
+                        <a href="{{ route('home') }}#produk">Produk Unggulan</a>
                         <a href="{{ route('prestasi-kegiatan.index') }}">Prestasi & Kegiatan</a>
                         <a href="{{ route('proyek-laboratorium.index') }}">Proyek Laboratorium</a>
                         <a href="{{ route('public.alumni.index') }}">Alumni</a>
@@ -1001,6 +1685,153 @@
 
     {{-- Livewire Scripts --}}
     @livewireScripts
+
+    {{-- ===== Latar plexus =====================================================
+         Jaring titik yang saling terhubung ketika berdekatan. Ditulis langsung
+         dengan Canvas 2D, tanpa pustaka pihak ketiga: keseluruhannya di bawah
+         100 baris, sementara paket plexus siap pakai umumnya jauh lebih berat
+         dan sudah lama tidak dirawat.
+
+         Tiga hal yang menjaga agar ini tidak membebani perangkat pengunjung:
+         jumlah titik dihitung dari luas layar (dan dibatasi), animasi berhenti
+         saat tab tidak aktif, dan pengguna dengan preferensi hemat gerak hanya
+         mendapat satu frame diam. --}}
+    <script>
+        (function () {
+            var canvas = document.querySelector('.plexus-bg');
+            if (!canvas || !canvas.getContext) {
+                return;
+            }
+
+            var ctx = canvas.getContext('2d');
+            var hematGerak = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+            var JARAK_SAMBUNG = 175;   // px — di atas ini dua titik tidak dihubungkan
+            var KERAPATAN = 10000;     // 1 titik per sekian px² viewport
+            var MAKS_TITIK = 160;      // batas atas: biaya gambar tumbuh kuadratik
+
+            var lebar = 0, tinggi = 0, titik = [], frame = null;
+
+            function acak(min, maks) {
+                return min + Math.random() * (maks - min);
+            }
+
+            function taburTitik() {
+                var jumlah = Math.min(MAKS_TITIK, Math.round((lebar * tinggi) / KERAPATAN));
+                titik = [];
+                for (var i = 0; i < jumlah; i++) {
+                    titik.push({
+                        x: Math.random() * lebar,
+                        y: Math.random() * tinggi,
+                        dx: acak(-0.22, 0.22),
+                        dy: acak(-0.22, 0.22),
+                        r: acak(1.4, 2.9),
+                    });
+                }
+            }
+
+            function ukurUlang() {
+                // Dibatasi 2 supaya layar dengan DPR 3 tidak menggambar 9x piksel.
+                var dpr = Math.min(window.devicePixelRatio || 1, 2);
+                lebar = canvas.clientWidth;
+                tinggi = canvas.clientHeight;
+                canvas.width = Math.round(lebar * dpr);
+                canvas.height = Math.round(tinggi * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                taburTitik();
+            }
+
+            function gambar() {
+                ctx.clearRect(0, 0, lebar, tinggi);
+
+                // Garis dulu, titik belakangan, supaya simpul tampak di atas jaring.
+                ctx.lineWidth = 1.2;
+                for (var i = 0; i < titik.length; i++) {
+                    var a = titik[i];
+                    for (var j = i + 1; j < titik.length; j++) {
+                        var b = titik[j];
+                        var dx = a.x - b.x;
+                        var dy = a.y - b.y;
+                        var jarakKuadrat = dx * dx + dy * dy;
+                        if (jarakKuadrat > JARAK_SAMBUNG * JARAK_SAMBUNG) {
+                            continue;
+                        }
+                        // Makin dekat, makin pekat — sqrt hanya dihitung untuk
+                        // pasangan yang lolos ambang di atas.
+                        var kepekatan = (1 - Math.sqrt(jarakKuadrat) / JARAK_SAMBUNG) * 0.62;
+                        ctx.strokeStyle = 'rgba(47, 95, 224, ' + kepekatan.toFixed(3) + ')';
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.stroke();
+                    }
+                }
+
+                ctx.fillStyle = 'rgba(14, 116, 144, 0.80)';
+                for (var k = 0; k < titik.length; k++) {
+                    var t = titik[k];
+                    ctx.beginPath();
+                    ctx.arc(t.x, t.y, t.r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function langkah() {
+                for (var i = 0; i < titik.length; i++) {
+                    var t = titik[i];
+                    t.x += t.dx;
+                    t.y += t.dy;
+                    // Pantulkan di tepi, bukan dibungkus, agar tidak ada titik
+                    // yang tiba-tiba muncul di seberang layar.
+                    if (t.x <= 0 || t.x >= lebar) { t.dx *= -1; }
+                    if (t.y <= 0 || t.y >= tinggi) { t.dy *= -1; }
+                }
+                gambar();
+                frame = window.requestAnimationFrame(langkah);
+            }
+
+            function jalan() {
+                if (frame === null) {
+                    frame = window.requestAnimationFrame(langkah);
+                }
+            }
+
+            function berhenti() {
+                if (frame !== null) {
+                    window.cancelAnimationFrame(frame);
+                    frame = null;
+                }
+            }
+
+            ukurUlang();
+
+            if (hematGerak.matches) {
+                gambar();   // satu frame diam, tanpa animasi
+            } else {
+                jalan();
+            }
+
+            var tundaUkur = null;
+            window.addEventListener('resize', function () {
+                window.clearTimeout(tundaUkur);
+                tundaUkur = window.setTimeout(function () {
+                    ukurUlang();
+                    if (hematGerak.matches) {
+                        gambar();
+                    }
+                }, 200);
+            }, { passive: true });
+
+            // Jangan bakar baterai untuk tab yang tidak dilihat siapa pun.
+            document.addEventListener('visibilitychange', function () {
+                if (document.hidden || hematGerak.matches) {
+                    berhenti();
+                } else {
+                    jalan();
+                }
+            });
+        })();
+    </script>
 
     @stack('scripts')
     @stack('modals')

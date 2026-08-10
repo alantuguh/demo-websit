@@ -5,7 +5,7 @@
 @section('content')
 
 {{-- ===================== HERO ===================== --}}
-<section class="position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.75) 0%,  rgba(174, 191, 218, 0.75) 100%), url('{{ asset('images/lab.jpg') }}'); padding: 110px 0 90px; background-size: cover; background-position: center;">
+<section class="page-hero" style="--hero-photo: url('{{ asset('images/lab.jpg') }}');">
     <div class="container">
         <div class="row align-items-center g-5 flex-column-reverse flex-lg-row">
             <div class="col-lg-7 text-center text-lg-start">
@@ -13,7 +13,7 @@
                 <h1 class="display-5 fw-bold mb-3" style="letter-spacing: -1px;" data-aos="fade-up" data-aos-delay="100">
                     Proyek <span class="text-gradient">Laboratorium</span>
                 </h1>
-                <p class="lead mx-auto mx-lg-0" style="max-width: 580px; color: var(--ink);" data-aos="fade-up" data-aos-delay="200">
+                <p class="lead mx-auto mx-lg-0" style="max-width: 580px;" data-aos="fade-up" data-aos-delay="200">
                     Program dan proyek kerja sama Laboratorium LPSKE, meliputi Wibawa, Jarpak, Semesta, DIKTI, dan Kerja Sama UNS.
                 </p>
             </div>
@@ -29,7 +29,7 @@
             </div>
             <div class="wave-divider-bottom">
                 <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M321.45,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C79.44,114.28,154.58,109.11,218.4,92.83c31.11-7.92,61.85-18.7,92.93-29.21Z" fill="rgba(112, 133, 177, 0.7)"></path>
+                    <path d="M321.45,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C79.44,114.28,154.58,109.11,218.4,92.83c31.11-7.92,61.85-18.7,92.93-29.21Z" fill="rgba(239, 243, 252, 0.94)"></path>
                 </svg>
             </div>
         </div>
@@ -82,7 +82,7 @@
                             <span class="badge rounded-pill px-3 py-2 align-self-start mb-3" style="background: {{ $item->status === 'selesai' ? '#1c8a4a' : 'var(--secondary-color)' }}; color: #fff;">
                                 {{ $statusOptions[$item->status] ?? ucfirst($item->status) }}
                             </span>
-                            <div class="mt-auto pt-2" style="border-top: 1px solid rgba(17,24,39,0.06);">
+                            <div class="mt-auto pt-2" style="border-top: 1px solid var(--hairline);">
                                 <a href="{{ route('proyek-laboratorium.show', $item) }}" class="btn btn-outline-brand w-100 mt-3">
                                     <i class="fas fa-arrow-right me-2"></i>Lihat Detail
                                 </a>

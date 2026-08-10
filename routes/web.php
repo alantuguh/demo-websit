@@ -47,6 +47,16 @@ Route::controller(\App\Http\Controllers\ProyekLaboratoriumController::class)
         Route::get('/{proyekLaboratorium}', 'show')->name('show');
     });
 
+// VR Ergonomy Lab — laboratorium virtual dengan ruang-ruang tematik.
+// Ruang dirujuk lewat slug (lihat VrRoom::getRouteKeyName).
+Route::controller(\App\Http\Controllers\VrErgonomyController::class)
+    ->prefix('vr-ergonomy')
+    ->name('vr-ergonomy.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{vrRoom}', 'show')->name('room');
+    });
+
     // Kolaborator route
 Route::get('/kolaborator', [LandingController::class, 'kolaborator'])
     ->name('kolaborator');

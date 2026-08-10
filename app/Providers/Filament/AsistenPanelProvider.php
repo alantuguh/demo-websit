@@ -4,6 +4,8 @@ namespace App\Providers\Filament;
 
 use Filament\Panel;
 use Filament\PanelProvider;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View;
 use Filament\Pages;
 use Filament\Widgets;
 use Filament\Support\Colors\Color;
@@ -30,7 +32,8 @@ class AsistenPanelProvider extends PanelProvider
             ->authPasswordBroker('asistens')
             ->brandName('Asisten Panel')
             ->colors([
-                'primary' => Color::Green,
+                'primary' => Color::hex('#2f5fe0'),
+                'info' => Color::hex('#0e7490'),
             ])
             ->discoverResources(in: app_path('Filament/Asisten/Resources'), for: 'App\\Filament\\Asisten\\Resources')
             ->navigationGroups([
@@ -48,6 +51,10 @@ class AsistenPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
             ])
+            ->renderHook(
+                PanelsRenderHook::HEAD_END,
+                fn (): View => view('filament.panel-theme'),
+            )
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

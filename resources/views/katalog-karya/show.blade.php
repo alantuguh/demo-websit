@@ -5,7 +5,7 @@
 @section('content')
 
 {{-- ===================== HERO ===================== --}}
-<section class="position-relative overflow-hidden" style="background: linear-gradient(360deg, rgba(195, 208, 227, 0.5) 0%, #aebfda 100%); padding: 100px 0 60px;">
+<section class="page-hero" style="padding: 100px 0 60px;">
     <div class="container text-center">
         <span class="eyebrow" data-aos="fade-up">
             <i class="fas fa-tag me-1"></i> {{ $kategoriOptions[$karyaLab->kategori] ?? ucfirst($karyaLab->kategori) }}
@@ -51,7 +51,7 @@
                         </div>
                     @endif
 
-                    <div class="mt-5 pt-4" style="border-top: 1px solid rgba(17,24,39,0.08);">
+                    <div class="mt-5 pt-4" style="border-top: 1px solid var(--hairline);">
                         <div class="d-flex flex-wrap gap-2">
                             <span class="badge rounded-pill px-3 py-2" style="background: var(--accent-color); color: var(--primary-dark);">
                                 <i class="fas fa-tag me-1"></i> {{ $kategoriOptions[$karyaLab->kategori] ?? ucfirst($karyaLab->kategori) }}

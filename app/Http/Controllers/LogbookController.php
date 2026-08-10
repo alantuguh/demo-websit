@@ -9,6 +9,6 @@ class LogbookController extends Controller
 {
     public function getRecentLogbook()
     {
-        return Logbook::recent();
+        return response()->json(Logbook::recent()->first());
     }
 }
