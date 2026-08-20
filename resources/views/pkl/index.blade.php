@@ -74,13 +74,22 @@
             </div>
 
             <div class="pkl-video-frame" data-aos="fade-up" data-aos-delay="100">
-                <video src="{{ asset('videos/promosi-pkl.mp4') }}"
+                {{-- Autoplay hanya diizinkan browser jika muted; kontrol tetap
+                     dipasang supaya pengunjung bisa menyalakan suara narasi. --}}
+                <video id="pkl-video"
+                       src="{{ asset('videos/promosi-pkl.mp4') }}"
                        poster="{{ asset('images/promosi-pkl.jpg') }}"
                        controls
+                       muted
+                       loop
                        playsinline
                        preload="none"
                        aria-label="Video promosi program PKL LPSKE"></video>
             </div>
+            <p class="text-center text-muted mt-3 mb-0" style="font-size: 0.85rem;" data-aos="fade-up">
+                <i class="fas fa-volume-xmark me-1" aria-hidden="true"></i>
+                Video diputar otomatis tanpa suara &mdash; klik ikon speaker untuk mendengar narasinya.
+            </p>
         </div>
     </section>
 
@@ -426,4 +435,38 @@
         color: var(--muted);
     }
 </style>
+@endpush
+
+@push('scripts')
+<script>
+    // Autoplay video promosi saat kartunya terlihat, jeda saat tergulir keluar
+    // (pola yang sama dengan video sorotan di beranda). preload="none":
+    // berkas baru diunduh saat play() pertama dipanggil.
+    document.addEventListener('DOMContentLoaded', function () {
+        var video = document.getElementById('pkl-video');
+        if (!video) return;
+
+        if (!('IntersectionObserver' in window)) {
+            video.play().catch(function () {});
+            return;
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    if (entry.target.paused) {
+                        var attempt = entry.target.play();
+                        if (attempt && typeof attempt.catch === 'function') {
+                            attempt.catch(function () {});
+                        }
+                    }
+                } else if (!entry.target.paused) {
+                    entry.target.pause();
+                }
+            });
+        }, { threshold: 0.35 });
+
+        observer.observe(video);
+    });
+</script>
 @endpush
