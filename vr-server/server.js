@@ -19,6 +19,11 @@ process.title = "lpske-vr-server";
 
 const port = process.env.PORT || 8080;
 
+// Di produksi (di belakang proxy nginx) set HOST=127.0.0.1 supaya port ini
+// tidak terekspos langsung ke internet. Bawaan 0.0.0.0 memudahkan uji coba
+// multiplayer antar perangkat di jaringan lokal.
+const host = process.env.HOST || "0.0.0.0";
+
 // Lebih dari ini, pemain baru dialihkan ke instance ruang berikutnya
 // (nama ruang diberi akhiran "--2", "--3", dst.) agar satu scene tidak
 // kebanjiran avatar.
@@ -122,6 +127,6 @@ io.on("connection", (socket) => {
     });
 });
 
-webServer.listen(port, () => {
-    console.log("lpske-vr-server siap di http://localhost:" + port);
+webServer.listen(port, host, () => {
+    console.log("lpske-vr-server siap di http://" + host + ":" + port);
 });
