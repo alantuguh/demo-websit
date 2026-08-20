@@ -95,8 +95,11 @@
             'nama' => 'BrainNova',
             'deskripsi' => 'Platform neurotechnology berbasis analisis sinyal otak (EEG) yang dikembangkan tim mahasiswa UNS. Memadukan perangkat EEG Muse dengan Neuro-AI Signal Processing Engine untuk analisis real-time gelombang Delta, Theta, Alpha, dan Beta guna menopang kesehatan mental, pendidikan, serta keselamatan publik.',
             'url' => 'https://brainovahub.com',
-            'video' => '',
-            'poster' => '',
+            // Cuplikan 14 detik dari video profil BrainNova
+            // (https://youtu.be/USFzb_IPWKE), dipotong & dibisukan agar
+            // seukuran cuplikan kartu produk lain.
+            'video' => 'brainova',
+            'poster' => 'brainova',
             'logo' => 'Brainova.png',
             'ikon' => 'fa-lightbulb',
             'unggulan' => false,
