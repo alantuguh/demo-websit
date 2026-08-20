@@ -1547,6 +1547,9 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('program-pkl') ? 'active' : '' }}" href="{{ route('program-pkl') }}">Program PKL</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('toko.*') ? 'active' : '' }}" href="{{ route('toko.index') }}">Toko</a>
+                    </li>
                 </ul>
             </div>
         </div>

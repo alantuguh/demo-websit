@@ -69,6 +69,19 @@ Route::get('/kolaborator', [LandingController::class, 'kolaborator'])
 Route::get('/program-pkl', [LandingController::class, 'programPkl'])
     ->name('program-pkl');
 
+// Toko LPSKE — produk komersial + form pesanan (tanpa gateway pembayaran;
+// pesanan ditindaklanjuti admin dari panel).
+Route::controller(\App\Http\Controllers\TokoController::class)
+    ->prefix('toko')
+    ->name('toko.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{product}', 'show')->name('show');
+        Route::post('/{product}/pesan', 'pesan')
+            ->middleware('throttle:10,1')
+            ->name('pesan');
+    });
+
     
 // Logbook
 Route::get('/recent-logbook', [LogbookController::class, 'getRecentLogbook'])->name('logbook.recent');
