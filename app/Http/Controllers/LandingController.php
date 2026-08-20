@@ -195,5 +195,15 @@ class LandingController extends Controller
         return view('kolaborator.index');
     }
 
+    /**
+     * Halaman promosi program PKL (Praktik Kerja Lapangan) untuk siswa SMK.
+     * Konten statis; bukti nyatanya menautkan ke halaman Kolaborator yang
+     * memang berisi siswa PKL angkatan sebelumnya.
+     */
+    public function programPkl()
+    {
+        return view('pkl.index');
+    }
+
     // Method prestasiKegiatan dipindahkan ke PrestasiKegiatanController
 }

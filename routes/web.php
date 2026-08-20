@@ -54,12 +54,20 @@ Route::controller(\App\Http\Controllers\VrErgonomyController::class)
     ->name('vr-ergonomy.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+
+        // Scene VR multiplayer sebuah ruang (A-Frame + Networked-A-Frame).
+        Route::get('/{vrRoom}/vr', 'vr')->name('vr');
+
         Route::get('/{vrRoom}', 'show')->name('room');
     });
 
     // Kolaborator route
 Route::get('/kolaborator', [LandingController::class, 'kolaborator'])
     ->name('kolaborator');
+
+// Program PKL untuk siswa SMK
+Route::get('/program-pkl', [LandingController::class, 'programPkl'])
+    ->name('program-pkl');
 
     
 // Logbook

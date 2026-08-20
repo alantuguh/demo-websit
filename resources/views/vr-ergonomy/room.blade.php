@@ -23,6 +23,15 @@
                         {{ $room->deskripsi }}
                     </p>
                 @endif
+
+                <div class="mt-4" data-aos="fade-up" data-aos-delay="300">
+                    <a href="{{ route('vr-ergonomy.vr', $room) }}" class="btn btn-brand btn-lg px-4">
+                        <i class="fas fa-vr-cardboard me-2"></i> Masuk Lab VR
+                    </a>
+                    <p class="vr-hint-multiplayer mt-2 mb-0">
+                        Multiplayer &mdash; buka tautan yang sama di perangkat lain untuk masuk bersama.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -162,6 +171,12 @@
 
     .vr-back:hover {
         color: #a5f3fc;
+    }
+
+    /* Keterangan kecil di bawah tombol Masuk Lab VR, di dalam band hero gelap */
+    .vr-hint-multiplayer {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.65);
     }
 </style>
 @endpush

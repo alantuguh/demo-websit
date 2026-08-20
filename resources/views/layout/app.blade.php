@@ -1544,6 +1544,9 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('public.alumni.index') ? 'active' : '' }}" href="{{ route('public.alumni.index') }}">Alumni</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('program-pkl') ? 'active' : '' }}" href="{{ route('program-pkl') }}">Program PKL</a>
+                    </li>
                 </ul>
             </div>
         </div>

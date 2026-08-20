@@ -64,4 +64,23 @@ class VrErgonomyController extends Controller
             'statusOptions' => VrModule::statusOptions(),
         ]);
     }
+
+    /**
+     * Scene VR multiplayer sebuah ruang, dibangun dengan A-Frame +
+     * Networked-A-Frame. View-nya halaman HTML penuh yang berdiri sendiri
+     * (tanpa layout situs) karena scene memakai seluruh layar.
+     */
+    public function vr(VrRoom $vrRoom)
+    {
+        abort_unless($vrRoom->is_active, 404);
+
+        $vrRoom->load(['activeModules' => fn ($query) => $query->orderBy('sort_order')]);
+
+        return view('vr-ergonomy.vr', [
+            'room' => $vrRoom,
+            'modules' => $vrRoom->activeModules,
+            'levelOptions' => VrModule::levelOptions(),
+            'serverUrl' => config('vr.server_url'),
+        ]);
+    }
 }
