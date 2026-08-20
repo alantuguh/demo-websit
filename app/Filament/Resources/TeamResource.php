@@ -57,6 +57,7 @@ class TeamResource extends Resource
                                                         'dosen' => 'Dosen Laboratorium',
                                                         'asisten' => 'Asisten Laboratorium',
                                                         'anggota' => 'Anggota',
+                                                        'pkl' => 'Siswa PKL',
                                                     ])
                                                     ->required()
                                                     ->reactive(),
@@ -72,11 +73,11 @@ class TeamResource extends Resource
                                                 TextInput::make('angkatan')
                                                     ->label('Angkatan')
                                                     ->numeric()
-                                                    ->visible(fn (callable $get) => in_array($get('type'), ['asisten', 'anggota'])),
+                                                    ->visible(fn (callable $get) => in_array($get('type'), ['asisten', 'anggota', 'pkl'])),
 
                                                 TextInput::make('study_program')
-                                                    ->label('Program Studi')
-                                                    ->visible(fn (callable $get) => $get('type') === 'asisten'),
+                                                    ->label('Program Studi / Kelompok PKL')
+                                                    ->visible(fn (callable $get) => in_array($get('type'), ['asisten', 'pkl'])),
                                                 TextInput::make('expertise')
                                                     ->label('Bidang Keahlian')
                                                     ->visible(fn (callable $get) => in_array($get('type'), ['kepala', 'dosen'])),
@@ -144,7 +145,9 @@ class TeamResource extends Resource
                         $states = [
                             'kepala' => 'Kepala Laboratorium',
                             'dosen' => 'Dosen Laboratorium',
-                            'asisten' => 'Asisten Laboratorium'
+                            'asisten' => 'Asisten Laboratorium',
+                            'anggota' => 'Anggota',
+                            'pkl' => 'Siswa PKL',
                         ];
                         return $states[$state] ?? $state;
                     })
@@ -153,7 +156,9 @@ class TeamResource extends Resource
                         $colors = [
                             'kepala' => 'danger',
                             'dosen' => 'primary',
-                            'asisten' => 'success'
+                            'asisten' => 'success',
+                            'anggota' => 'info',
+                            'pkl' => 'warning',
                         ];
                         return $colors[$state] ?? 'gray';
                     }),

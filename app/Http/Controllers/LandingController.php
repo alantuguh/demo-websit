@@ -192,7 +192,14 @@ class LandingController extends Controller
      */
     public function kolaborator()
     {
-        return view('kolaborator.index');
+        // Siswa PKL angkatan berjalan; tampil di tab "PKL 2026" dan dikelola
+        // lewat panel admin (Team bertipe 'pkl'), bukan di-hardcode di view.
+        $pklSiswa = Team::type('pkl')->active()
+            ->where('angkatan', 2026)
+            ->orderBy('sort_order')
+            ->get();
+
+        return view('kolaborator.index', compact('pklSiswa'));
     }
 
     /**

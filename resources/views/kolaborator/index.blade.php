@@ -46,6 +46,11 @@
                 </button>
             </li>
             <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pkl2026-tab" data-bs-toggle="tab" data-bs-target="#pkl2026" type="button" role="tab" aria-controls="pkl2026" aria-selected="false">
+                    <i class="fas fa-briefcase me-2"></i>PKL 2026
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
                 <button class="nav-link" id="enuma-tab" data-bs-toggle="tab" data-bs-target="#enuma" type="button" role="tab" aria-controls="enuma" aria-selected="false">
                     <i class="fas fa-building me-2"></i>Enuma Technology
                 </button>
@@ -83,6 +88,43 @@
         </ul>
 
         <div class="tab-content" id="kolaboratorTabsContent">
+
+            {{-- PKL 2026 Tab — datanya dari database (Team bertipe 'pkl'),
+                 dikelola lewat panel admin, bukan di-hardcode seperti tab lain. --}}
+            <div class="tab-pane fade" id="pkl2026" role="tabpanel" aria-labelledby="pkl2026-tab">
+                @if (($pklSiswa ?? collect())->isEmpty())
+                    <div class="card-flat p-5 text-center">
+                        <p class="text-muted mb-0">Data siswa PKL 2026 belum tersedia.</p>
+                    </div>
+                @else
+                    <div class="row g-4">
+                        @foreach ($pklSiswa as $i => $siswa)
+                            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($i % 3) * 80 }}">
+                                <div class="card-flat h-100 p-4">
+                                    <div class="person-card">
+                                        @if ($siswa->photo)
+                                            <img src="{{ asset('storage/' . $siswa->photo) }}"
+                                                 alt="{{ $siswa->name }}" class="person-avatar"
+                                                 style="object-fit: cover;" loading="lazy">
+                                        @else
+                                            <span class="person-avatar pkl-avatar-inisial" aria-hidden="true">
+                                                {{ collect(explode(' ', $siswa->name))->take(2)->map(fn ($k) => mb_substr($k, 0, 1))->implode('') }}
+                                            </span>
+                                        @endif
+                                        <h5 class="person-name">{{ $siswa->name }}</h5>
+                                        <p class="person-role">
+                                            {{ $siswa->study_program ? $siswa->study_program . ' / ' : '' }}SMK N 2 Surakarta
+                                        </p>
+                                        <div class="person-meta">
+                                            <span class="badge-soft"><i class="fas fa-calendar-alt"></i> PKL {{ $siswa->angkatan }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
 
             {{-- SMK N 2 Surakarta Tab --}}
             <div class="tab-pane fade show active" id="smk2" role="tabpanel" aria-labelledby="smk2-tab">
@@ -316,6 +358,18 @@
         border-color: transparent;
         color: #fff;
         box-shadow: 0 12px 26px rgba(47, 95, 224, 0.34);
+    }
+
+    /* Avatar inisial untuk siswa PKL yang belum punya foto */
+    .pkl-avatar-inisial {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.6rem;
+        letter-spacing: 0.04em;
+        color: #fff;
+        background: linear-gradient(140deg, var(--primary-color), var(--primary-bright));
     }
 </style>
 @endpush
