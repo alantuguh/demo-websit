@@ -1,0 +1,4 @@
+{
+    "//": "File ini hanya untuk Node saat menjalankan tests/js/*.test.cjs — root package.json memakai type:module, sedangkan modul UMD di folder ini perlu diperlakukan sebagai CommonJS. Browser tidak membaca file ini.",
+    "type": "commonjs"
+}

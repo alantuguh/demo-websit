@@ -69,6 +69,17 @@ Route::get('/kolaborator', [LandingController::class, 'kolaborator'])
 Route::get('/program-pkl', [LandingController::class, 'programPkl'])
     ->name('program-pkl');
 
+// Muse Lab — pemantauan EEG headband Muse dengan interpretasi neuro-ergonomi.
+Route::controller(\App\Http\Controllers\MuseLabController::class)
+    ->prefix('muse-lab')
+    ->name('muse-lab.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/sesi', 'storeSession')
+            ->middleware('throttle:12,1')
+            ->name('sesi');
+    });
+
 // Toko LPSKE — produk komersial + form pesanan (tanpa gateway pembayaran;
 // pesanan ditindaklanjuti admin dari panel).
 Route::controller(\App\Http\Controllers\TokoController::class)

@@ -1550,6 +1550,9 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('toko.*') ? 'active' : '' }}" href="{{ route('toko.index') }}">Toko</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('muse-lab.*') ? 'active' : '' }}" href="{{ route('muse-lab.index') }}">Muse Lab</a>
+                    </li>
                 </ul>
             </div>
         </div>
